@@ -41,7 +41,7 @@ namespace WebappsIV_1920_be_AudreyB
             services.AddDbContext<FilmContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("FilmContext")));
 
-            services.AddSwaggerDocument();
+            //services.AddSwaggerDocument();
         
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
