@@ -23,7 +23,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// Get all films 
         /// </summary>
         /// <returns>array of films</returns>
-        [HttpPost]
+        [HttpGet]
         public IEnumerable<Film> GetFilms()
         {
             return _filmRepository.GetAllFilms();
