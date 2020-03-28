@@ -19,7 +19,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public string Regiseur { get; set; }
         public ICollection<string> Schrijvers { get; set; }
         public string KortInhoud { get; set; }
-        public string Productie { get; set; }
+        public string Productiebedrijf { get; set; }
         public DateTime Jaar { get; set; }
         // Film affiche  
         #endregion
@@ -29,7 +29,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         {
 
         }
-        public Film(string titel, DateTime jaar, DateTime duur, ICollection<Genre> genre, List<String> acteurs, string regiseur, List<string> schrijvers, string korteInhoud, string productie)
+        public Film(string titel, DateTime jaar, DateTime duur, ICollection<Genre> genre, List<String> acteurs, string regiseur, List<string> schrijvers, string korteInhoud, string productiebedrijf)
         {
             this.Titel = titel;
             this.Jaar = jaar;
@@ -39,7 +39,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.Regiseur = regiseur;
             this.Schrijvers = schrijvers;
             this.KortInhoud = korteInhoud;
-            this.Productie = productie;
+            this.Productiebedrijf = productiebedrijf;
         }
         #endregion
 

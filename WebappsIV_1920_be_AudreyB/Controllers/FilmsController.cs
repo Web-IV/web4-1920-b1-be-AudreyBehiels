@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebappsIV_1920_be_AudreyB.Models;
 
 namespace WebappsIV_1920_be_AudreyB.Controllers
-{   
+{
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
@@ -28,6 +28,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         [HttpGet]
         public IEnumerable<Film> GetFilms()
         {
+
             return _filmRepository.GetAllFilms();
         }
 
@@ -35,17 +36,17 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// Geeft alle films met de juiste titel
         /// </summary>
         /// <param name="titel">Titel van de film</param>
-        /// <returns>Lijst van films met juist titel</returns>
-        [HttpGet]
+        /// <returns>array van films met juist titel</returns>
+        [HttpGet("titel")]
         public IEnumerable<Film> GetFilmsByTitle(string titel)
         {
             IEnumerable<Film> films = _filmRepository.GetFilmsByTitel(titel);
-            if(films == null || films.Equals(""))
+            if(string.IsNullOrEmpty(titel))
             {
-                throw new ArgumentNullException("Geen films gevonden met deze titel");
+                return _filmRepository.GetAllFilms();
             } else
             {
-                return films.ToList();
+                return films;
             }
 
         }
