@@ -23,9 +23,9 @@ GET api/Films/GetFilmsByJaar/{jaar}
 - [x] Printscreen van de API zoals weergegeven in swagger. Per endpoint een printscreen van de parameters en de responses
 - [x] Printscreen van het klassendiagram van de domeinlaag (toont de klassen met properties en methodes (inclusief de datatypes) en de associaties)
 - [x] Opsomming van de instellingen die nodig zijn om je backend project lokaal te runnen, indien nodig
-- [ ] Voorbereiding feedback moment:
+- [ ] Voorbereiding feedback moment: \
       - Ik zou graag willen weten of mijn domeinlaag en mijn controllerklasse goed is 
-
+	  - Ik heb een probleem met mijn FE repository, ik heb perongelijk mijn BE project ook op mijn FE gezet. Ik heb dit eerst zelf proberen oplossen, ik heb de documenten ervan kunnen halen maar ik kan mijn FE project niet commite en pushe naar mijn FE repository. Ik heb ook al een mail gestuurd naar de meneer De Cock.
 # Domein laag
 - [x] Het domein bevat minstens 2 geassocieerde klassen
 - [x] Klassen bevatten toestand en gedrag
