@@ -25,7 +25,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// geeft alle films 
         /// </summary>
         /// <returns>array van films</returns>
-        [HttpGet("getfilms")]
+        [HttpGet("GetFilms")]
         public IEnumerable<Film> GetFilms()
         {
             return _filmRepository.GetAllFilms();

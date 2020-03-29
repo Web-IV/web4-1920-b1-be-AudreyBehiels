@@ -1,10 +1,28 @@
 ## web4-1920-b1-be-AudreyBehiels
 # Webapplicatie_IV Backend Audrey Behiels
 
+# screenshots van de API
+Film API Swagger
+![Alt text](Screenshots/FilmAPISwagger.png)
+
+GET api/Films/GetFilms
+![Alt text](Screenshots/GETAlleFilms.png)
+
+GET api/Films/GetFilmsByTitel/{titel}
+![Alt text](Screenshots/GETFilmsByTitel.png)
+
+
+GET api/Films/GetFilmsByJaar/{jaar}
+![Alt text](Screenshots/GETFilmsByJaar.png)
+
+# screenshots Klassendiagram
+![Alt text](Screenshots/klassediagram.png)
+![Alt text](Screenshots/controllerklassediagram.png)
+
 # de readme
-- [ ] Printscreen van de API zoals weergegeven in swagger. Per endpoint een printscreen van de parameters en de responses
-- [ ] Printscreen van het klassendiagram van de domeinlaag (toont de klassen met properties en methodes (inclusief de datatypes) en de associaties)
-- [ ] Opsomming van de instellingen die nodig zijn om je backend project lokaal te runnen, indien nodig
+- [x] Printscreen van de API zoals weergegeven in swagger. Per endpoint een printscreen van de parameters en de responses
+- [x] Printscreen van het klassendiagram van de domeinlaag (toont de klassen met properties en methodes (inclusief de datatypes) en de associaties)
+- [x] Opsomming van de instellingen die nodig zijn om je backend project lokaal te runnen, indien nodig
 - [ ] Voorbereiding feedback moment:
 
 # Domein laag
