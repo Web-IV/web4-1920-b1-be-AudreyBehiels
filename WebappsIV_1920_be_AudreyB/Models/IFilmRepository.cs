@@ -11,7 +11,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
 
         Film GetFilmByTitel(string titel);
         IEnumerable<Film> GetFilmsByTitel(string titel);
-        IEnumerable<Film> GetFilmsByYear(DateTime jaar);
+        IEnumerable<Film> GetFilmsByYear(int jaar);
         IEnumerable<Film> GetFilmsByGenre(string genre);
 
         void SaveChanges();

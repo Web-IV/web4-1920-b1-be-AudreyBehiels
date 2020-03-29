@@ -28,13 +28,22 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 Acteur KevinB = new Acteur("Kevin Bacon");
                 Acteur LoriS = new Acteur("Lori Singer");
                 Acteur JohnL = new Acteur("John Lithgow");
-                Acteur DiannaW = new Acteur("Dianne Wiest"); 
+                Acteur DiannaW = new Acteur("Dianne Wiest");
+                Acteur MarkH = new Acteur("Mark Hamill");
+                Acteur HarrisonF = new Acteur("Harrison Ford");
+                Acteur CarrieF = new Acteur("Carrie Fisher");
+                Acteur PeterC = new Acteur("Peter Cushing");
+                Acteur BarretO = new Acteur("Barret Oliver");
+                Acteur GeraldMcR = new Acteur("Gerald McRaney");
+                Acteur ChrisE = new Acteur("Chris Eastman");
+                Acteur DarrylC = new Acteur("Darryl Cooksey");
                 #endregion
-                _dbFilmContext.Acteurs.AddRange(LeonardoDC, KateW, KathyB, BillyZ, KevinB, LoriS, JohnL, DiannaW);
+                _dbFilmContext.Acteurs.AddRange(LeonardoDC, KateW, KathyB, BillyZ, KevinB, LoriS, JohnL, DiannaW, BarretO, GeraldMcR, ChrisE,
+                   DarrylC );
                 _dbFilmContext.SaveChanges();
 
                 #region Genres
-                Genre drama = new Genre("Drama");
+                Genre Drama = new Genre("Drama");
                 Genre Romantiek = new Genre("Romantiek");
                 Genre Actie = new Genre("Actie");
                 Genre Avontuur = new Genre("Avontuur");
@@ -63,14 +72,19 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 Genre Detective = new Genre("Detective");
                 Genre Familie = new Genre("Familie"); 
                 #endregion
-                _dbFilmContext.Genres.AddRange(new Genre[] { drama, Romantiek, Actie , Avontuur , Komedie , Documentaire , Fantasie, Horror,
+                _dbFilmContext.Genres.AddRange(new Genre[] { Drama, Romantiek, Actie , Avontuur , Komedie , Documentaire , Fantasie, Horror,
                 Kunst,Misdaad , Muziek, Natuur, Kinderfilm, Sport, Sciencefiction, Thriller, Westers, Oorlog, Superhelden, Tekenfilm, zwartWit,
                Religie, Musical, Mysterie, Religieus, Geschiedenis, Detective, Familie});
                 _dbFilmContext.SaveChanges();
 
+                #region Schrijvers
                 Schrijver JamesC = new Schrijver("James Cameron");
                 Schrijver DeanP = new Schrijver("Dean Pitchford");
-                _dbFilmContext.Schrijvers.AddRange(new Schrijver[] { JamesC, DeanP });
+                Schrijver GeorgeL = new Schrijver("George Lucas");
+                Schrijver WolfgangP = new Schrijver("Wolfgang Petersen");
+                Schrijver HermanW = new Schrijver("Herman Weigel"); 
+                #endregion
+                _dbFilmContext.Schrijvers.AddRange(new Schrijver[] { JamesC, DeanP, GeorgeL, WolfgangP, HermanW});
                 _dbFilmContext.SaveChanges();
 
                 // string titel, int jaar, int duur, string regiseur, string korteInhoud, string productie)
@@ -83,7 +97,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.Films.Add(Titanic);
                 _dbFilmContext.SaveChanges();
 
-                FilmGenre fg1 = new FilmGenre(Titanic, drama);
+                FilmGenre fg1 = new FilmGenre(Titanic, Drama);
                 FilmGenre fg2 = new FilmGenre(Titanic, Romantiek);
                 _dbFilmContext.FilmGenres.AddRange(new FilmGenre[] { fg1, fg2 });
                 _dbFilmContext.SaveChanges();
@@ -99,28 +113,79 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.FilmSchrijvers.Add(fs1);
                 _dbFilmContext.SaveChanges();
 
-                Film Footloose = new Film("Footloose", 1984,  107,  "Herbert Ross",
+                 Film Footloose = new Film("Footloose", 1984,  107,  "Herbert Ross",
                      "De film gaat over de tiener Ren die met zijn moeder van Chicago (Illinois) naar Bomont verhuist. " +
                      "Hij maakt nieuwe vrienden, ook de mooie Ariel heeft vanaf het begin zijn aandacht. Ren is bezeten door muziek en dansen, en dat is in Bomont verboden. " +
                      "Dominee Moore is er tegen omdat zijn zoon na een nachtje fuiven is omgekomen in een ongeval. Ren blijft volhouden en kan de dominee, de vader van Ariel, overtuigen een dansavond te organiseren.", "Paramount Home Video");
-                FilmGenre fg3 = new FilmGenre(Footloose, drama);
+                FilmGenre fg3 = new FilmGenre(Footloose, Drama);
                 FilmGenre fg4 = new FilmGenre(Footloose, Romantiek);
                 FilmGenre fg5 = new FilmGenre(Footloose, Musical);
                 FilmGenre fg6 = new FilmGenre(Footloose, Muziek);
 
                 _dbFilmContext.FilmGenres.AddRange(new FilmGenre[] { fg3, fg4, fg5, fg6});
                 _dbFilmContext.SaveChanges();
-
-                 FilmSchrijver fs2 = new FilmSchrijver(Footloose, DeanP);
-                _dbFilmContext.FilmSchrijvers.Add(fs2);
-                _dbFilmContext.SaveChanges();
-
+       
                 FilmActeur fa5 = new FilmActeur(Footloose, KevinB);
                 FilmActeur fa6 = new FilmActeur(Footloose, LoriS);
                 FilmActeur fa7 = new FilmActeur(Footloose, JohnL);
                 FilmActeur fa8 = new FilmActeur(Footloose, DiannaW);
                 _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa5, fa6, fa7, fa8 });
                 _dbFilmContext.SaveChanges();
+
+                FilmSchrijver fs2 = new FilmSchrijver(Footloose, DeanP);
+                _dbFilmContext.FilmSchrijvers.Add(fs2);
+                _dbFilmContext.SaveChanges();
+
+                Film StarWarsEIV = new Film("Star Wars: Episode IV - A New Hope", 1977, 121, "George Lucas", /*new List<string> { "George Lucas" },*/
+                    "Luke Skywalker werkt op het land bij z'n oom en tante op de planeet Tatooine. Als zij door Keizerlijke troepen worden vermoord, sluit Luke zich aan bij de groep rebellen die vecht tegen de tirannie van de Keizer en de slechte Darth Vader. Luke, Princess Leia, Han Solo en de andere rebellen doen een poging de Death Star, het nieuwe wapen van de Keizer, te vernietigen.", "20th Century Fox");
+                FilmGenre fg7 = new FilmGenre(StarWarsEIV, Actie);
+                FilmGenre fg8 = new FilmGenre(StarWarsEIV, Avontuur);
+                FilmGenre fg9 = new FilmGenre(StarWarsEIV, Fantasie);
+                FilmGenre fg10 = new FilmGenre(StarWarsEIV, Sciencefiction);
+
+                _dbFilmContext.FilmGenres.AddRange(new FilmGenre[] { fg7, fg8, fg9, fg10 });
+                _dbFilmContext.SaveChanges();
+
+                FilmActeur fa9 = new FilmActeur(StarWarsEIV, MarkH);
+                FilmActeur fa10 = new FilmActeur(StarWarsEIV, HarrisonF);
+                FilmActeur fa11 = new FilmActeur(StarWarsEIV, CarrieF);
+                FilmActeur fa12 = new FilmActeur(StarWarsEIV, PeterC);
+                _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa9, fa10, fa11, fa12 });
+                _dbFilmContext.SaveChanges();
+
+                FilmSchrijver fs3 = new FilmSchrijver(StarWarsEIV, GeorgeL);
+                _dbFilmContext.FilmSchrijvers.Add(fs3);
+                _dbFilmContext.SaveChanges();
+
+                Film TheNeverEndingStory = new Film("The NeverEnding Story", 1984,102, "Wolfgang Petersen",/* new List<string> { "Wolfgang Petersen", "Herman Weigel" },*/
+                   "Shy, awkward Bastian is amazed to discover that he has become a character in the mysterious book he is reading and that he has an important mission to fulfill.", "Warner Home Video");
+                FilmGenre fg11 = new FilmGenre(TheNeverEndingStory, Avontuur);
+                FilmGenre fg12 = new FilmGenre(TheNeverEndingStory, Familie);
+                FilmGenre fg13 = new FilmGenre(TheNeverEndingStory, Drama);
+                FilmGenre fg14 = new FilmGenre(TheNeverEndingStory, Fantasie);
+                _dbFilmContext.FilmGenres.AddRange(new FilmGenre[] { fg11, fg12, fg13, fg14 });
+                _dbFilmContext.SaveChanges();
+
+                FilmActeur fa13 = new FilmActeur(TheNeverEndingStory, BarretO);
+                FilmActeur fa14 = new FilmActeur(TheNeverEndingStory, GeraldMcR);
+                FilmActeur fa15 = new FilmActeur(TheNeverEndingStory, ChrisE);
+                FilmActeur fa16 = new FilmActeur(TheNeverEndingStory, DarrylC);
+                _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa13, fa14, fa15, fa16 });
+                _dbFilmContext.SaveChanges();
+
+                FilmSchrijver fs4 = new FilmSchrijver(TheNeverEndingStory, WolfgangP);
+                FilmSchrijver fs5 = new FilmSchrijver(TheNeverEndingStory, HermanW);
+                _dbFilmContext.FilmSchrijvers.AddRange(new FilmSchrijver[] { fs4, fs5 });
+                _dbFilmContext.SaveChanges();
+
+                //  FilmGenre fg5 = new FilmGenre(TheNeverEndingStory, new List<string> { "Avontuur", "Drama", "Fantasie", "Familie" });
+                // FilmSchrijver fs5 = new FilmSchrijver(TheNeverEndingStory, new List<string> { "Wolfgang Petersen", "Herman Weigel" });
+                // FilmActeur fa5 = new FilmActeur(TheNeverEndingStory, new List<string> { "Barret Oliver", "Gerald McRaney", "Chris Eastman", "Darryl Cooksey" });
+
+
+                //  FilmGenre fg4 = new FilmGenre(StarWarsEIV, new List<string> { "Actie", "Avontuur", "Fantasie", "Sciencefiction" });
+                // FilmSchrijver fs4 = new FilmSchrijver(StarWarsEIV, new List<string> { "George Lucas" });
+                // FilmActeur fa4 = new FilmActeur(StarWarsEIV, new List<string> { "Mark Hamill", "Harrison Ford", "Carrie Fisher", "Peter Cushing" });
 
 
                 // Film TheShawshankRedemption = new Film("The Shawshank Redemption", new DateTime(1994), new DateTime(0, 0, 0, 0, 142, 0),/* new List<string> {"Drama"},new List<string> { "Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler" }, */  "Frank Darabont",/* new List<string> { "Frank Darabont" },*/
@@ -129,17 +194,6 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 // FilmSchrijver fs3 = new FilmSchrijver(TheShawshankRedemption,new List<string>{ "Frank Darabont" } );
                 // FilmActeur fa3 = new FilmActeur(TheShawshankRedemption, new List<string> { "Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler" });
 
-                // Film StarWarsEIV = new Film("Star Wars: Episode IV - A New Hope", new DateTime(1977), new DateTime(0, 0, 0, 0, 121, 0), /*new List<string> { "Actie", "Avontuur", "Fantasie", "Sciencefiction" }, new List<string> { "Mark Hamill", "Harrison Ford", "Carrie Fisher", "Peter Cushing" }, */ "George Lucas", /*new List<string> { "George Lucas" },*/
-                //     "Luke Skywalker werkt op het land bij z'n oom en tante op de planeet Tatooine. Als zij door Keizerlijke troepen worden vermoord, sluit Luke zich aan bij de groep rebellen die vecht tegen de tirannie van de Keizer en de slechte Darth Vader. Luke, Princess Leia, Han Solo en de andere rebellen doen een poging de Death Star, het nieuwe wapen van de Keizer, te vernietigen.", "20th Century Fox");
-                // FilmGenre fg4 = new FilmGenre(StarWarsEIV, new List<string> { "Actie", "Avontuur", "Fantasie", "Sciencefiction" });
-                // FilmSchrijver fs4 = new FilmSchrijver(StarWarsEIV, new List<string> { "George Lucas" });
-                // FilmActeur fa4 = new FilmActeur(StarWarsEIV, new List<string> { "Mark Hamill", "Harrison Ford", "Carrie Fisher", "Peter Cushing" });
-
-                // Film TheNeverEndingStory = new Film("The NeverEnding Story", new DateTime(1984), new DateTime(0, 0, 0, 0, 102, 0), /*new List<string> { "Avontuur", "Drama", "Fantasie", "Familie" }, new List<string> { "Barret Oliver", "Gerald McRaney", "Chris Eastman", "Darryl Cooksey" }, */ "Wolfgang Petersen",/* new List<string> { "Wolfgang Petersen", "Herman Weigel" },*/
-                //     "Shy, awkward Bastian is amazed to discover that he has become a character in the mysterious book he is reading and that he has an important mission to fulfill.", "Warner Home Video");
-                // FilmGenre fg5 = new FilmGenre(TheNeverEndingStory, new List<string> { "Avontuur", "Drama", "Fantasie", "Familie" });
-                // FilmSchrijver fs5 = new FilmSchrijver(TheNeverEndingStory, new List<string> { "Wolfgang Petersen", "Herman Weigel" });
-                // FilmActeur fa5 = new FilmActeur(TheNeverEndingStory, new List<string> { "Barret Oliver", "Gerald McRaney", "Chris Eastman", "Darryl Cooksey" });
 
                 // Film MammaMia = new Film("Mamma Mia!", new DateTime(2008), new DateTime(0, 0, 0, 0, 108, 0),/* new List<string> { "Romantiek", "Komedie","Musical","Muziek"},  new List<string> { "Amanda Seyfried", "Stellan Skarsgård", "Pierce Brosnan", "Nancy Baldwin" }, */ "Phyllida Lloyd", /*new List<string> { "Catherine Johnson" },*/
                 //     "Donna, een onafhankelijke, single moeder heeft een hotelletje op een idyllisch Grieks eiland. Ze staat op het punt om Sophie, de pittige dochter die ze alleen heeft grootgebracht, los te laten. Voor Sophie's huwelijk heeft Donna haar twee oude hartsvrienden uitgenodigd: de praktische en no-nonsense Rosie en de rijke, meermalen gescheiden Tanya van haar vroegere backing-band 'Donna and the Dynamos'. Maar Sophie heeft in het geheim zelf drie gasten uitgenodigd. " +

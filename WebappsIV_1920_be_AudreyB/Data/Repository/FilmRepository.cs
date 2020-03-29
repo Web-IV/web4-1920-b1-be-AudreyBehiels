@@ -33,9 +33,9 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
 
         public Film GetFilmByTitel(string titel)
         {
-            return _films.Include(f => f.FilmGenres).ThenInclude(fg => fg.Genre).AsQueryable()
-                .Include(f => f.FilmActeurs).ThenInclude(fa => fa.Acteur).AsQueryable()
-                 .Include(f => f.FilmSchrijvers).ThenInclude(fs => fs.Schrijver).AsQueryable()
+            return _films.Include(f => f.FilmGenres).ThenInclude(fg => fg.Genre)
+                .Include(f => f.FilmActeurs).ThenInclude(fa => fa.Acteur)
+                 .Include(f => f.FilmSchrijvers).ThenInclude(fs => fs.Schrijver)
                 .SingleOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
                 
         }
@@ -57,9 +57,12 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Where(s => s.FilmGenres.Equals(genre)).ToList();
           }
 
-        public IEnumerable<Film> GetFilmsByYear(DateTime jaar)
+        public IEnumerable<Film> GetFilmsByYear(int jaar)
         {
-            return _films.Where(s => s.Jaar.Equals(jaar)).ToList();
+            return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
+                .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+               .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
+               .Where(s => s.Jaar.Equals(jaar)).ToList();
         }
 
         public void SaveChanges()
