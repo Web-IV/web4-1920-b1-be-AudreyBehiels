@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebappsIV_1920_be_AudreyB.Data.Mapping;
 using WebappsIV_1920_be_AudreyB.Models;
 
 namespace WebappsIV_1920_be_AudreyB.Data
@@ -10,6 +11,12 @@ namespace WebappsIV_1920_be_AudreyB.Data
     public class FilmContext : DbContext
     {
         public DbSet<Film> Films { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Acteur> Acteurs { get; set; }
+        public DbSet<Schrijver> Schrijvers { get; set; }
+        public DbSet<FilmGenre> FilmGenres { get; set; }
+        public DbSet<FilmSchrijver> FilmSchrijvers { get; set; }
+        public DbSet<FilmActeur> FilmActeurs { get; set; }
 
         public FilmContext(DbContextOptions<FilmContext> options) : base(options)
         {
@@ -18,6 +25,24 @@ namespace WebappsIV_1920_be_AudreyB.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new FilmConfiguration());
+            builder.ApplyConfiguration(new FilmGenreConfiguration());
+            builder.ApplyConfiguration(new FilmSchrijverConfiguration());
+            builder.ApplyConfiguration(new FilmActeurConfiguration());
+
+            /* builder.Entity<Film>().HasKey(f => f.Titel);
+
+           // builder.Entity<Film>().Property(f => f.Titel).IsRequired();
+             builder.Entity<Film>().Property(f => f.Jaar).IsRequired();
+             builder.Entity<Film>().Property(f => f.Regisseur).IsRequired();
+             builder.Entity<Film>().Property(f => f.Schrijvers).IsRequired();
+             builder.Entity<Film>().Property(f => f.Productiebedrijf).IsRequired();
+             builder.Entity<Film>().Property(f => f.KortInhoud).IsRequired();
+             */
+
+            // builder.Entity<Genre>().HasMany<Film>(g => g.Films).WithOne
+
+
 
         }
     }

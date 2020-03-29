@@ -5,14 +5,26 @@ using System.Threading.Tasks;
 
 namespace WebappsIV_1920_be_AudreyB.Models
 {
-    public enum Genre
+    public class Genre
     {
-        Drama = 1, Romantiek = 2, Actie = 3, Avontuur = 4 ,
-        Komedie = 5, Documentaire = 6, Fantasie = 7, Horror = 8,
-        Kunst = 9, Misdaad = 10, Muziek = 11, Natuur = 12,
-        Kinderfilm = 13, Sport = 14, Sciencefiction = 15, 
-        Thriller = 16, Westers = 17, Oorlog = 19, Superhelden = 20,
-        Tekenfilm = 21, zwartWit = 22, Religieus = 23, Musical = 24,
-        Mysterie = 25, Geschiedenis = 26, Detective = 27, Familie = 28
+        #region Properties
+        public int GenreID { get; set; }
+        public string Naam { get; set; }
+        public ICollection<FilmGenre> FilmGenres { get; set; }
+       // public virtual ICollection<Film> Films { get; set; }
+
+        #endregion
+
+        public Genre(){}
+        public Genre(string naam)
+        {
+            this.Naam = naam;
+            this.FilmGenres = new List<FilmGenre>();
+           // this.Films = new List<Film>();
+
+        }
+
     }
+
+
 }

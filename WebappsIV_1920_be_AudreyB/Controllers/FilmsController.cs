@@ -25,11 +25,31 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// geeft alle films 
         /// </summary>
         /// <returns>array of films</returns>
-        [HttpGet]
-        public IEnumerable<Film> GetFilms()
-        {
+        //[HttpGet("GetFilms")]
+        //public IEnumerable<Film> GetFilms()
+        //{
+        //    return _filmRepository.GetAllFilms();
+        //}
 
-            return _filmRepository.GetAllFilms();
+
+        //GET: api/Films/Titanic
+        /// <summary>
+        /// Heeft de film met de gegeven titel
+        /// </summary>
+        /// <param name="titel">titel van de film</param>
+        /// <returns>De film</returns>
+        [HttpGet("GetFilmByTitle/{titel}")]
+        public ActionResult<Film> GetFilmByTitle(string titel)
+        {
+            Film film = _filmRepository.GetFilmByTitel(titel);
+            if (film == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return film;
+            }
         }
 
         /// <summary>
@@ -37,18 +57,18 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="titel">Titel van de film</param>
         /// <returns>array van films met juist titel</returns>
-        [HttpGet("titel")]
-        public IEnumerable<Film> GetFilmsByTitle(string titel)
-        {
-            IEnumerable<Film> films = _filmRepository.GetFilmsByTitel(titel);
-            if(string.IsNullOrEmpty(titel))
-            {
-                return _filmRepository.GetAllFilms();
-            } else
-            {
-                return films;
-            }
+        //[HttpGet("GetFilmsByTitle/{titel}")]
+        //public IEnumerable<Film> GetFilmsByTitle(string titel)
+        //{
+        //    IEnumerable<Film> films = _filmRepository.GetFilmsByTitel(titel);
+        //    if(string.IsNullOrEmpty(titel))
+        //    {
+        //        return _filmRepository.GetAllFilms();
+        //    } else
+        //    {
+        //        return films;
+        //    }
 
-        }
+        //}
     }
 }

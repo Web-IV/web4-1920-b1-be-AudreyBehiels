@@ -8,6 +8,8 @@ namespace WebappsIV_1920_be_AudreyB.Models
     public interface IFilmRepository
     {
         IEnumerable<Film> GetAllFilms();
+
+        Film GetFilmByTitel(string titel);
         IEnumerable<Film> GetFilmsByTitel(string titel);
         IEnumerable<Film> GetFilmsByYear(DateTime jaar);
         IEnumerable<Film> GetFilmsByGenre(string genre);

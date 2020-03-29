@@ -30,27 +30,30 @@ namespace WebappsIV_1920_be_AudreyB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-           // services.AddSwaggerDocument();
-            services.AddOpenApiDocument(s =>
-            {
-                s.DocumentName = "APIdocs";
-                s.Title = "Film API";
-                s.Version = "v1";
-                s.Description = "De documentatie van de film API";
-            });
+            // services.AddSwaggerDocument();
+            services.AddControllers().AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             services.AddDbContext<FilmContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("FilmContext")));
-
-            //services.AddSwaggerDocument();
-        
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
-       
-        
+
+            services.AddOpenApiDocument(s =>
+                        {
+                            s.DocumentName = "API Film docs";
+                            s.Title = "Film API";
+                            s.Version = "v1";
+                            s.Description = "De documentatie van de film API";
+                        });
+            //services.AddSwaggerDocument();
+
+            services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env /*FilmDataInitializer filmDataInitializer*/)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FilmDataInitializer filmDataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +64,7 @@ namespace WebappsIV_1920_be_AudreyB
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -69,7 +73,7 @@ namespace WebappsIV_1920_be_AudreyB
             {
                 endpoints.MapControllers();
             });
-            //filmDataInitializer.InitializeData();
+            filmDataInitializer.InitializeData();
         }
     }
 }

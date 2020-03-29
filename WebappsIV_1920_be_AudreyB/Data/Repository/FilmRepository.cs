@@ -25,18 +25,38 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
         #region Methods
         public IEnumerable<Film> GetAllFilms()
         {
-            return _films.ToList();
+            return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
+                .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+               .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
+                .ToList();
+        }
+
+        public Film GetFilmByTitel(string titel)
+        {
+            return _films.Include(f => f.FilmGenres).ThenInclude(fg => fg.Genre).AsQueryable()
+                .Include(f => f.FilmActeurs).ThenInclude(fa => fa.Acteur).AsQueryable()
+                 .Include(f => f.FilmSchrijvers).ThenInclude(fs => fs.Schrijver).AsQueryable()
+                //.FirstOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
+                .SingleOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
+                
         }
 
         public IEnumerable<Film> GetFilmsByTitel(string titel)
         {
-            return _films.Where(s => s.Titel.ToLower().Contains(titel.ToLower())).ToList();
+            return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
+                .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+               .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
+                .Where(s => s.Titel.ToLower().Equals(titel.ToLower())).ToList();
         }
 
-        public IEnumerable<Film> GetFilmsByGenre(string genre)
-        {
-            return _films.Where(s => s.Genre.Equals(genre)).ToList();
-        }
+          public IEnumerable<Film> GetFilmsByGenre(string genre)
+          {
+          
+            return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
+                .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+               .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
+                .Where(s => s.FilmGenres.Equals(genre)).ToList();
+          }
 
         public IEnumerable<Film> GetFilmsByYear(DateTime jaar)
         {
