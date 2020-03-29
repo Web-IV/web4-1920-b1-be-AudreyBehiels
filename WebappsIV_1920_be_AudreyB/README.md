@@ -4,9 +4,7 @@
 [] Printscreen van de API zoals weergegeven in swagger. Per endpoint een printscreen van de parameters en de responses\
 [] Printscreen van het klassendiagram van de domeinlaag (toont de klassen met properties en methodes (inclusief de datatypes) en de associaties)\
 [] Opsomming van de instellingen die nodig zijn om je backend project lokaal te runnen, indien nodig\
-[x] Voorbereiding feedback moment:\
- - 
- - 
+[] Voorbereiding feedback moment: \
 
 # Domein laag
 [x] Het domein bevat minstens 2 geassocieerde klassen\
