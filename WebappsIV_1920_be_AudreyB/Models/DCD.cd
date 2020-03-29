@@ -23,9 +23,9 @@
       <FileName>Models\Film.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
+      <Property Name="FilmGenres" />
       <Property Name="FilmSchrijvers" />
       <Property Name="FilmActeurs" />
-      <Property Name="FilmGenres" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="WebappsIV_1920_be_AudreyB.Models.FilmActeur">
@@ -36,7 +36,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAQBAAAAAAAAgEBAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAACAAAAAQBAAAAAAAEgEBAAA=</HashCode>
       <FileName>Models\FilmActeur.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -53,7 +53,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAIAAAAAAAAABAAAAAAAggABAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAABIAAAAAAAgABAAAAAAAggABAAA=</HashCode>
       <FileName>Models\FilmGenre.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -62,7 +62,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="WebappsIV_1920_be_AudreyB.Models.Gebruiker">
-    <Position X="1" Y="1.25" Width="4.25" />
+    <Position X="6.75" Y="9" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAAgAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Gebruiker.cs</FileName>
@@ -76,14 +76,8 @@
         <Point X="13.25" Y="1.875" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="Schrijver" Type="WebappsIV_1920_be_AudreyB.Models.Schrijver" FixedFromPoint="true">
-      <Path>
-        <Point X="8.688" Y="4.084" />
-        <Point X="8.688" Y="5.75" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAgAQAAAAAAAAAAAAAAAABAAAAAAAAgABAAA=</HashCode>
+      <HashCode>AAAAgAAAAgAQAAAAAAAAAAAAAAAABQAAAQAAAgABAAA=</HashCode>
       <FileName>Models\FilmSchrijver.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -93,11 +87,7 @@
   </Class>
   <Class Name="WebappsIV_1920_be_AudreyB.Models.Genre">
     <Position X="21.75" Y="6" Width="3.25" />
-    <AssociationLine Name="FilmGenres" Type="WebappsIV_1920_be_AudreyB.Models.FilmGenre" FixedToPoint="true">
-      <Path>
-        <Point X="22.938" Y="6" />
-        <Point X="22.938" Y="3.834" />
-      </Path>
+    <AssociationLine Name="FilmGenres" Type="WebappsIV_1920_be_AudreyB.Models.FilmGenre">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="0.046" Y="0.227" />
       </MemberNameLabel>
@@ -112,14 +102,6 @@
   </Class>
   <Class Name="WebappsIV_1920_be_AudreyB.Models.Schrijver">
     <Position X="6" Y="5.75" Width="3.75" />
-    <AssociationLine Name="FilmSchrijvers" Type="WebappsIV_1920_be_AudreyB.Models.FilmSchrijver" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.75" Y="5.75" />
-        <Point X="7.75" Y="5.667" />
-        <Point X="7.25" Y="5.667" />
-        <Point X="7.25" Y="4.084" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAQAAAAAAAAABAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Schrijver.cs</FileName>
@@ -128,8 +110,15 @@
       <Property Name="FilmSchrijvers" />
     </ShowAsCollectionAssociation>
   </Class>
+  <Class Name="WebappsIV_1920_be_AudreyB.Controllers.FilmsController">
+    <Position X="20.5" Y="9" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQAAAIAAE=</HashCode>
+      <FileName>Controllers\FilmsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="WebappsIV_1920_be_AudreyB.Models.IFilmRepository">
-    <Position X="1" Y="4.75" Width="3.5" />
+    <Position X="13.25" Y="9.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>oAAAAAAAAAAAAAAABABAAAAAAAAAAIAEAAAAAAAAAAA=</HashCode>
       <FileName>Models\IFilmRepository.cs</FileName>

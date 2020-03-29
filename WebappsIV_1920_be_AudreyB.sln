@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebappsIV_1920_be_AudreyB", "WebappsIV_1920_be_AudreyB\WebappsIV_1920_be_AudreyB.csproj", "{ADD2197E-D9D9-486C-93F7-A92B3DCB910A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebappsIV_1920_be_AudreyB", "WebappsIV_1920_be_AudreyB\WebappsIV_1920_be_AudreyB.csproj", "{ADD2197E-D9D9-486C-93F7-A92B3DCB910A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{96B18A9A-1976-4E4D-881C-B2E386632369}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Pictures\Screenshots\controllerklassediagram.png = ..\..\..\..\Pictures\Screenshots\controllerklassediagram.png
+		..\..\..\..\Pictures\Screenshots\FilmApISwagger.png = ..\..\..\..\Pictures\Screenshots\FilmApISwagger.png
+		..\..\..\..\Pictures\Screenshots\GETAlleFilms.png = ..\..\..\..\Pictures\Screenshots\GETAlleFilms.png
+		..\..\..\..\Pictures\Screenshots\GETFilmsByJaar.png = ..\..\..\..\Pictures\Screenshots\GETFilmsByJaar.png
+		..\..\..\..\Pictures\Screenshots\GETFilmsByTitel.png = ..\..\..\..\Pictures\Screenshots\GETFilmsByTitel.png
+		..\..\..\..\Pictures\Screenshots\klassendiagram.png = ..\..\..\..\Pictures\Screenshots\klassendiagram.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
