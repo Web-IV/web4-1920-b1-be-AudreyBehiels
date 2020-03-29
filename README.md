@@ -3,7 +3,7 @@
 
 # screenshots van de API
 Film API Swagger
-![Alt text](Screenshots/FilmAPISwagger.png)
+![Alt text](Screenshots/FilmApISwagger.png)
 
 GET api/Films/GetFilms
 ![Alt text](Screenshots/GETAlleFilms.png)
@@ -16,7 +16,7 @@ GET api/Films/GetFilmsByJaar/{jaar}
 ![Alt text](Screenshots/GETFilmsByJaar.png)
 
 # screenshots Klassendiagram
-![Alt text](Screenshots/klassediagram.png)
+![Alt text](Screenshots/klassendiagram.png)
 ![Alt text](Screenshots/controllerklassediagram.png)
 
 # de readme
@@ -24,6 +24,7 @@ GET api/Films/GetFilmsByJaar/{jaar}
 - [x] Printscreen van het klassendiagram van de domeinlaag (toont de klassen met properties en methodes (inclusief de datatypes) en de associaties)
 - [x] Opsomming van de instellingen die nodig zijn om je backend project lokaal te runnen, indien nodig
 - [ ] Voorbereiding feedback moment:
+      - Ik zou graag willen weten of mijn domeinlaag en mijn controllerklasse goed is 
 
 # Domein laag
 - [x] Het domein bevat minstens 2 geassocieerde klassen
