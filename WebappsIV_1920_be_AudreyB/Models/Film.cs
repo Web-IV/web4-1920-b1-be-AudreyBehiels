@@ -15,11 +15,8 @@ namespace WebappsIV_1920_be_AudreyB.Models
         [Required]
         public string Titel { get; set; }
         public int Duur { get; set; }
-        [JsonIgnore]
         public ICollection<FilmGenre> FilmGenres { get; set; }
-        [JsonIgnore]
         public ICollection<FilmSchrijver> FilmSchrijvers { get; set; }
-        [JsonIgnore]
         public ICollection<FilmActeur> FilmActeurs { get; set; }
         public string Regisseur { get; set; }
         public string KortInhoud { get; set; }

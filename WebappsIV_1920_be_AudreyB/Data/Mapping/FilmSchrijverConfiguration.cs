@@ -17,7 +17,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Mapping
             builder.Property(fg => fg.FilmID).IsRequired();
             builder.Property(fg => fg.SchrijverID).IsRequired();
             //builder.Property(fg => fg.FilmTitel).IsRequired();
-            //builder.Property(fg => fg.SchrijverNaam).IsRequired();
+            builder.Property(fg => fg.SchrijverNaam).IsRequired();
 
             builder.HasOne(fg => fg.Film).WithMany(fg => fg.FilmSchrijvers)
                 .HasForeignKey(us => us.FilmID).OnDelete(DeleteBehavior.Cascade);

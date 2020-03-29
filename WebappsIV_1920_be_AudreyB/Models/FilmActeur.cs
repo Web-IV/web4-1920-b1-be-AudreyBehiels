@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WebappsIV_1920_be_AudreyB.Models
@@ -11,8 +11,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #region Fields
         private int _filmID;
         private int _acteurID;
-        //private string _filmTitel;
-        //private string _acteurNaam;
+        private string _acteurNaam;
         #endregion
 
         #region Properties
@@ -30,16 +29,11 @@ namespace WebappsIV_1920_be_AudreyB.Models
             get { return _acteurID; }
             set { _acteurID = Acteur.ActeurID; }
         }
-        //public string FilmTitel
-        //{
-        //    get { return _filmTitel; }
-        //    set { _filmTitel = Film.Titel; }
-        //}
-        //public string ActeurNaam
-        //{
-        //    get { return _acteurNaam; }
-        //    set { _acteurNaam = Acteur.Acteurnaam; }
-        //}
+        public string ActeurNaam
+        {
+            get { return _acteurNaam; }
+            set { _acteurNaam = Acteur.Acteurnaam; }
+        }
         #endregion
 
         #region Constructors
@@ -48,6 +42,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         {
             this.Film = film;
             this.Acteur = acteur;
+            this._acteurNaam = Acteur.Acteurnaam;
         }
         #endregion
     }
