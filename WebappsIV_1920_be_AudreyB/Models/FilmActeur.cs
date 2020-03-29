@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WebappsIV_1920_be_AudreyB.Models
@@ -12,11 +13,12 @@ namespace WebappsIV_1920_be_AudreyB.Models
         private int _acteurID;
         //private string _filmTitel;
         //private string _acteurNaam;
-        //private ICollection<string> _acteursNamen;
         #endregion
 
         #region Properties
+        [JsonIgnore]
         public Film Film { get; set; }
+        [JsonIgnore]
         public Acteur Acteur { get; set; }
         public int FilmID
         {
@@ -38,7 +40,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
         //    get { return _acteurNaam; }
         //    set { _acteurNaam = Acteur.Acteurnaam; }
         //}
-        //  public ICollection<string> ActeursNamen { get; set; }
         #endregion
 
         #region Constructors
@@ -48,16 +49,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.Film = film;
             this.Acteur = acteur;
         }
-        //public FilmActeur(Film film, string acteurNaam)
-        //{
-        //    this.Film = film;
-        //    this.ActeurNaam = acteurNaam;
-        //}
-        //public FilmActeur(Film film, List<string> acteursNamen)
-        //{
-        //    this.Film = film;
-        //    this.ActeursNamen = acteursNamen;
-        //}
         #endregion
     }
 }

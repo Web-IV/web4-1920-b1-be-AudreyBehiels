@@ -30,20 +30,6 @@ namespace WebappsIV_1920_be_AudreyB.Data
             builder.ApplyConfiguration(new FilmSchrijverConfiguration());
             builder.ApplyConfiguration(new FilmActeurConfiguration());
 
-            /* builder.Entity<Film>().HasKey(f => f.Titel);
-
-           // builder.Entity<Film>().Property(f => f.Titel).IsRequired();
-             builder.Entity<Film>().Property(f => f.Jaar).IsRequired();
-             builder.Entity<Film>().Property(f => f.Regisseur).IsRequired();
-             builder.Entity<Film>().Property(f => f.Schrijvers).IsRequired();
-             builder.Entity<Film>().Property(f => f.Productiebedrijf).IsRequired();
-             builder.Entity<Film>().Property(f => f.KortInhoud).IsRequired();
-             */
-
-            // builder.Entity<Genre>().HasMany<Film>(g => g.Films).WithOne
-
-
-
         }
     }
 }

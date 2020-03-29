@@ -25,16 +25,16 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// geeft alle films 
         /// </summary>
         /// <returns>array of films</returns>
-        //[HttpGet("GetFilms")]
-        //public IEnumerable<Film> GetFilms()
-        //{
-        //    return _filmRepository.GetAllFilms();
-        //}
+        [HttpGet("getfilms")]
+        public IEnumerable<Film> GetFilms()
+        {
+            return _filmRepository.GetAllFilms();
+        }
 
 
         //GET: api/Films/Titanic
         /// <summary>
-        /// Heeft de film met de gegeven titel
+        /// geeft de film met de gegeven titel
         /// </summary>
         /// <param name="titel">titel van de film</param>
         /// <returns>De film</returns>

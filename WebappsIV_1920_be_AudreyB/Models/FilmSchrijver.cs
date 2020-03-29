@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WebappsIV_1920_be_AudreyB.Models
@@ -12,7 +13,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
         private int _schrijverID;
         //private string _filmTitel;
         //private string _schrijverNaam;
-        //private ICollection<string> _schrijverNamen;
 
         #endregion
 
@@ -39,13 +39,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
         //    get { return _schrijverNaam; }
         //    set { _schrijverNaam = Schrijver.Naam; }
         //}
-        /* public ICollection<string> Schrijversnamen
-         {
-             get { return _schrijverNamen; }
-             set { _schrijverNamen = SchrijversNamen; }
-         }*/
-
-        //  public ICollection<string> SchrijversNamen { get; set; }
         #endregion
 
         #region Constructors
@@ -55,16 +48,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.Film = film;
             this.Schrijver = schrijver;
         }
-        //public FilmSchrijver(Film film, string schrijverNaam)
-        //{
-        //    this.Film = film;
-        //    this.SchrijverNaam = schrijverNaam;
-        //}
-        //public FilmSchrijver(Film film, List<string> schrijversnamen)
-        //{
-        //    this.Film = film;
-        //    this.SchrijversNamen = schrijversnamen;
-        //}
         #endregion
     }
 }

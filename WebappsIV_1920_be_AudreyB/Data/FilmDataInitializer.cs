@@ -30,7 +30,6 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 Acteur JohnL = new Acteur("John Lithgow");
                 Acteur DiannaW = new Acteur("Dianne Wiest"); 
                 #endregion
-
                 _dbFilmContext.Acteurs.AddRange(LeonardoDC, KateW, KathyB, BillyZ, KevinB, LoriS, JohnL, DiannaW);
                 _dbFilmContext.SaveChanges();
 

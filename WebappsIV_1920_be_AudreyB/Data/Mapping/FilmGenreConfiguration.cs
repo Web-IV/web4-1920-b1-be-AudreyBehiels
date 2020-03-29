@@ -21,20 +21,9 @@ namespace WebappsIV_1920_be_AudreyB.Data.Mapping
 
             builder.HasOne(fg => fg.Film).WithMany(fg => fg.FilmGenres)
                 .HasForeignKey(us => us.FilmID).OnDelete(DeleteBehavior.Cascade);
-
+          
             builder.HasOne(fg => fg.Genre).WithMany(fg => fg.FilmGenres)
                 .HasForeignKey(us => us.GenreID).OnDelete(DeleteBehavior.Cascade);
-
-            //builder.ToTable("FilmGenre");
-            //builder.HasKey(fg => new { fg.FilmTitel, fg.GenreNaam });
-            //builder.Property(fg => fg.FilmTitel).IsRequired();
-            //builder.Property(fg => fg.GenreNaam).IsRequired();
-
-            //builder.HasOne(fg => fg.Film).WithMany(fg => fg.FilmGenres)
-            //    .HasForeignKey(us => us.FilmTitel).OnDelete(DeleteBehavior.Cascade);
-
-            //builder.HasOne(fg => fg.Genre).WithMany(fg => fg.FilmGenres)
-            //    .HasForeignKey(us => us.GenreNaam).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

@@ -36,7 +36,6 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
             return _films.Include(f => f.FilmGenres).ThenInclude(fg => fg.Genre).AsQueryable()
                 .Include(f => f.FilmActeurs).ThenInclude(fa => fa.Acteur).AsQueryable()
                  .Include(f => f.FilmSchrijvers).ThenInclude(fs => fs.Schrijver).AsQueryable()
-                //.FirstOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
                 .SingleOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
                 
         }

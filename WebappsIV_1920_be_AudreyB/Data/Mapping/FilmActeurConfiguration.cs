@@ -25,16 +25,6 @@ namespace WebappsIV_1920_be_AudreyB.Data.Mapping
             builder.HasOne(fg => fg.Acteur).WithMany(fg => fg.FilmsActeurs)
                 .HasForeignKey(us => us.ActeurID).OnDelete(DeleteBehavior.Cascade);
 
-            //builder.ToTable("FilmActeur");
-            //builder.HasKey(fa => new { fa.FilmTitel, fa.ActeurNaam });
-            // builder.Property(fg => fg.FilmTitel).IsRequired();
-            //builder.Property(fg => fg.ActeurNaam).IsRequired();
-
-            //builder.HasOne(fg => fg.Film).WithMany(fg => fg.FilmActeurs)
-            //        .HasForeignKey(us => us.FilmTitel).OnDelete(DeleteBehavior.Cascade);
-
-            //builder.HasOne(fg => fg.Acteur).WithMany(fg => fg.FilmsActeurs)
-            //    .HasForeignKey(us => us.ActeurNaam).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

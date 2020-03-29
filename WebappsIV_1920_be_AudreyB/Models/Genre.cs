@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WebappsIV_1920_be_AudreyB.Models
@@ -10,9 +11,8 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #region Properties
         public int GenreID { get; set; }
         public string Naam { get; set; }
+        [JsonIgnore]
         public ICollection<FilmGenre> FilmGenres { get; set; }
-       // public virtual ICollection<Film> Films { get; set; }
-
         #endregion
 
         public Genre(){}
@@ -20,7 +20,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
         {
             this.Naam = naam;
             this.FilmGenres = new List<FilmGenre>();
-           // this.Films = new List<Film>();
 
         }
 

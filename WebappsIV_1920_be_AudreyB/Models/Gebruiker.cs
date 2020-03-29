@@ -16,11 +16,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #endregion
 
         #region Constructors
-        public Gebruiker()
-        {
-
-        }
-
+        public Gebruiker() { }
         public Gebruiker(string voornaam, string familienaam, string mailadres)
         {
             this.Voornaam = voornaam;
