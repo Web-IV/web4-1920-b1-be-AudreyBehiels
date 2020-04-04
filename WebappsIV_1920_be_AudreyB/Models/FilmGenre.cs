@@ -20,11 +20,13 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public Film Film { get; set; }
         [JsonIgnore]
         public Genre Genre { get; set; }
+        [JsonIgnore]
         public int FilmID
         {
             get { return _filmID; }
             set { _filmID = Film.FilmId; }
         }
+        [JsonIgnore]
         public int GenreID
         {
             get { return _genreID; }

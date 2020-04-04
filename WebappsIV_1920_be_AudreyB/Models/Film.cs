@@ -13,15 +13,16 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public int FilmId { get; set; }
 
         [Required]
-        public string Titel { get; set; }
-        public int Duur { get; set; }
+        public string Titel { get; set; } 
+        public int Jaar { get; set; }
+        public int Duur { get; set; } 
+        public string Regisseur { get; set; }
         public ICollection<FilmGenre> FilmGenres { get; set; }
         public ICollection<FilmSchrijver> FilmSchrijvers { get; set; }
         public ICollection<FilmActeur> FilmActeurs { get; set; }
-        public string Regisseur { get; set; }
-        public string KortInhoud { get; set; }
         public string Productiebedrijf { get; set; }
-        public int Jaar { get; set; }
+        public string KortInhoud { get; set; }
+       
         // Film affiche  
         #endregion
 
