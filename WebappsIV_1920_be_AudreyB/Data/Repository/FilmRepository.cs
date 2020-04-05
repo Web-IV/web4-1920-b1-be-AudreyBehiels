@@ -37,7 +37,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Include(f => f.FilmActeurs).ThenInclude(fa => fa.Acteur)
                  .Include(f => f.FilmSchrijvers).ThenInclude(fs => fs.Schrijver)
                 .SingleOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
-                
+
         }
 
         public IEnumerable<Film> GetFilmsByTitel(string titel)
@@ -48,14 +48,25 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Where(s => s.Titel.ToLower().Equals(titel.ToLower())).ToList();
         }
 
-          public IEnumerable<Film> GetFilmsByGenre(string genre)
-          {
-          
-            return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
-                .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
-               .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
-                .Where(s => s.FilmGenres.Equals(genre)).ToList();
-          }
+        public IEnumerable<Film> GetFilmsByGenre(string genre)
+        {
+
+            ICollection<Film> films = new List<Film>();
+            foreach (var film in _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
+       .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+      .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver))
+            {
+                foreach (var f in film.FilmGenres)
+                {
+                    if (f.GenreNaam.Equals(genre))
+                    {
+                        films.Add(f.Film);
+                    }
+                }
+            }
+            return films.ToList();
+
+        }
 
         public IEnumerable<Film> GetFilmsByYear(int jaar)
         {

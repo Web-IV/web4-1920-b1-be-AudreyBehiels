@@ -15,6 +15,10 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
     {
         private readonly IFilmRepository _filmRepository;
 
+        /// <summary>
+        /// FilmController
+        /// </summary>
+        /// <param name="context">Object FilmRepository interface</param>
         public FilmsController(IFilmRepository context)
         {
             _filmRepository = context;
@@ -22,7 +26,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
 
         // GET: api/Films
         /// <summary>
-        /// geeft alle films 
+        /// Geeft alle films 
         /// </summary>
         /// <returns>array van films</returns>
         [HttpGet("GetFilms")]
@@ -33,7 +37,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
 
         //GET: api/Films/GetFilmByTitle/Titanic
         /// <summary>
-        /// geeft de film met de gegeven titel
+        /// Geeft de film met de gegeven titel
         /// </summary>
         /// <param name="titel">Titel van de film</param>
         /// <returns>De film</returns>
@@ -51,6 +55,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             }
         }
 
+        //GET: api/Films/GetFilmByJaar/1984
         /// <summary>
         /// Geeft alle films met het juiste jaar
         /// </summary>
@@ -62,6 +67,18 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
           return _filmRepository.GetFilmsByYear(jaar);
             
         }
+
+        /// <summary>
+        /// Geeft de films met het juiste genre
+        /// </summary>
+        /// <param name="genre">genre naam</param>
+        /// <returns>array van films</returns>
+        [HttpGet("GetFilmsByGenre/{genre}")]
+        public IEnumerable<Film> GetFilmsByGenre(string genre)
+        {
+            return _filmRepository.GetFilmsByGenre(genre);
+        }
+
 
         /// <summary>
         /// Geeft alle films met de juiste titel

@@ -68,6 +68,7 @@ namespace WebappsIV_1920_be_AudreyB
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("AllowAllOrigins");
 
             app.UseEndpoints(endpoints =>
             {
