@@ -12,6 +12,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
         #region Properties
         private readonly FilmContext _filmContext;
         private readonly DbSet<Film> _films;
+
         #endregion
 
         #region Constructor
@@ -53,8 +54,8 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
 
             ICollection<Film> films = new List<Film>();
             foreach (var film in _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
-       .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
-      .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver))
+             .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+             .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver))
             {
                 foreach (var f in film.FilmGenres)
                 {
@@ -65,7 +66,6 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 }
             }
             return films.ToList();
-
         }
 
         public IEnumerable<Film> GetFilmsByYear(int jaar)
@@ -75,11 +75,18 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
                .Where(s => s.Jaar.Equals(jaar)).ToList();
         }
+       
+        public void AddFilmToOwnList(string titel)
+        {
+
+        }
 
         public void SaveChanges()
         {
             _filmContext.SaveChanges();
         }
+
+        
         #endregion
     }
 }
