@@ -32,7 +32,12 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         [HttpGet("")]
         public IEnumerable<Film> GetFilms()
         {
-            return _filmRepository.GetAllFilms();
+            IEnumerable<Film> films = _filmRepository.GetAllFilms();
+            if (films == null)
+            {
+                throw new ArgumentNullException("Geen films");
+            }
+            return films;
         }
 
         //GET: api/Films/GetFilmByTitle/Titanic
@@ -64,8 +69,12 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         [HttpGet("GetFilmsByJaar/{jaar}")]
         public IEnumerable<Film> GetFilmsByJaar(int jaar)
         {
-          return _filmRepository.GetFilmsByYear(jaar);
-            
+            IEnumerable<Film> films = _filmRepository.GetFilmsByYear(jaar);
+            if (films == null)
+            {
+                throw new ArgumentNullException("Geen films");
+            }
+            return films;
         }
 
         /// <summary>
@@ -76,9 +85,13 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         [HttpGet("GetFilmsByGenre/{genre}")]
         public IEnumerable<Film> GetFilmsByGenre(string genre)
         {
-            return _filmRepository.GetFilmsByGenre(genre);
+            IEnumerable<Film> films =_filmRepository.GetFilmsByGenre(genre);
+            if (films == null)
+            {
+                throw new ArgumentNullException("Geen films");
+            }
+            return films;
         }
-
 
         /// <summary>
         /// Geeft alle films met de juiste titel

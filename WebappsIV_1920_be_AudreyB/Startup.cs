@@ -38,6 +38,7 @@ namespace WebappsIV_1920_be_AudreyB
             options.UseSqlServer(Configuration.GetConnectionString("FilmContext")));
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
+            services.AddScoped<IGebruikerRepository, GebruikerRepository>();
 
             services.AddOpenApiDocument(s =>
                         {

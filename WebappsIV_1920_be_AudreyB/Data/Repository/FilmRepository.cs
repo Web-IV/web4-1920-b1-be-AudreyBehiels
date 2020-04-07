@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,18 +76,12 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
                .Where(s => s.Jaar.Equals(jaar)).ToList();
         }
-       
-        public void AddFilmToOwnList(string titel)
-        {
-
-        }
 
         public void SaveChanges()
         {
             _filmContext.SaveChanges();
         }
 
-        
         #endregion
     }
 }

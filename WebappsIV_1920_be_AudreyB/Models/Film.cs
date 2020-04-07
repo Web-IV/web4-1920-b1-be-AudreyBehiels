@@ -22,7 +22,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public ICollection<FilmActeur> FilmActeurs { get; set; }
         public string Productiebedrijf { get; set; }
         public string KortInhoud { get; set; }
-       
+        public int AantalDuimenOmhoog { get; set; }
         // Film affiche  
         #endregion
 
@@ -39,11 +39,28 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.FilmGenres = new List<FilmGenre>();
             this.FilmSchrijvers = new List<FilmSchrijver>();
             this.FilmActeurs = new List<FilmActeur>();
+            this.AantalDuimenOmhoog = 0;
         }
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// Aantal duimen met 1 verhogen
+        /// </summary>
+        public void VoegDuimToe()
+        {
+            AantalDuimenOmhoog++;
+        }
+        public void VerwijderDuim()
+        {
+            if(AantalDuimenOmhoog == 0)
+            {
+                throw new Exception("Je kan de score van de het aantal duimen niet onder 0 laten zakken.");
+            } else if (AantalDuimenOmhoog >= 1)
+            {
+                AantalDuimenOmhoog--;
+            }
+        }
         #endregion
     }
 }
