@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,17 +17,16 @@ using WebappsIV_1920_be_AudreyB.Models;
 
 namespace WebappsIV_1920_be_AudreyB.Controllers
 {
+
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
-    [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class GebruikerController : ControllerBase
     {
 
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager; //IdentityUser
         private readonly UserManager<IdentityUser> _userManager;
-       // private readonly ICustomerRepository _customerRepository;
+        // private readonly ICustomerRepository _customerRepository;
         private readonly IConfiguration _config;
 
         private readonly IFilmRepository _filmRepository;
@@ -38,7 +38,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         {
             _signInManager = signInManager;
             _userManager = userManager;
-        //    _customerRepository = customerRepository;
+            //    _customerRepository = customerRepository;
             _config = config;
             _filmRepository = filmContext;
             _gebruikerRepository = gebruikerContext;
@@ -47,15 +47,15 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<String>> CreateToken(LoginDTO model)
+        public async Task<ActionResult<String>> AanmakenToken(LoginDTO model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email);
-            if (user != null)
+            var gebruiker = await _userManager.FindByNameAsync(model.Mailadres);
+            if (gebruiker != null)
             {
-                var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                var result = await _signInManager.CheckPasswordSignInAsync(gebruiker, model.Wachtwoord, false);
                 if (result.Succeeded)
                 {
-                    string token = GetToken(user);
+                    string token = GetToken(gebruiker);
                     return Created("", token); //returns only the token                
                 }
             }
@@ -70,48 +70,69 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(null, null, claims, expires: DateTime.Now.AddMinutes(30), signingCredentials: creds);
+            var token = new JwtSecurityToken(null, null, claims, expires: DateTime.Now.AddMinutes(60), signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-    
-
-    // PUT api/VoegtDuimToe/Titanic
-    /// <summary>
-    /// Verhoogt aantal duimen met 1
-    /// </summary>
-    /// <param name="filmtitel">titel van de film</param>
-    [HttpPut("VoegtDuimToe/{filmtitel}")]
-    public IActionResult VoegDuimToe(string filmtitel)
-    {
-        Film film = _filmRepository.GetFilmByTitel(filmtitel);
-        if (film == null)
+        [AllowAnonymous]
+        [HttpPost("registreer")]
+        public async Task<ActionResult<String>> Registreer(RegisterDTO model)
         {
-            return NotFound();
+            IdentityUser user = new IdentityUser
+            {
+                UserName = model.Mailadres,
+                Email = model.Mailadres
+            };
+            Gebruiker gebruiker = new Gebruiker { Mailadres = model.Mailadres, Voornaam = model.Voornaam, Familienaam = model.Familienaam };
+            var result = await _userManager.CreateAsync(user, model.Wachtwoord);
+            if (result.Succeeded)
+            {
+                _gebruikerRepository.ToevoegenGebruiker(gebruiker);
+                _gebruikerRepository.SaveChanges();
+                string token = GetToken(user);
+                return Created("", token);
+            }
+            return BadRequest();
         }
 
-        _gebruikerRepository.VoegDuimToe(film);
-        _gebruikerRepository.SaveChanges();
-        return NoContent();
 
-    }
-
-    // PUT api/verwijderdDuim/Titanic
-    /// <summary>
-    /// Verlaagt aantal duimen met 1
-    /// </summary>
-    /// <param name="filmtitel">titel van de film</param>
-    [HttpPut("VerwijderdDuim/{filmtitel}")]
-    public IActionResult VerwijderDuim(string filmtitel)
-    {
-
-        Film film = _filmRepository.GetFilmByTitel(filmtitel);
-        if (film == null)
+        // PUT api/VoegtDuimToe/Titanic
+        /// <summary>
+        /// Verhoogt aantal duimen met 1
+        /// </summary>
+        /// <param name="filmtitel">titel van de film</param>
+        [HttpPut("VoegtDuimToe/{filmtitel}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult VoegDuimToe(string filmtitel)
         {
-            return NotFound();
+            Film film = _filmRepository.GetFilmByTitel(filmtitel);
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            _gebruikerRepository.VoegDuimToe(film);
+            _gebruikerRepository.SaveChanges();
+            return NoContent();
         }
-        _gebruikerRepository.VerwijderDuim(film);
-        _gebruikerRepository.SaveChanges();
-        return NoContent();
+
+        // PUT api/verwijderdDuim/Titanic
+        /// <summary>
+        /// Verlaagt aantal duimen met 1
+        /// </summary>
+        /// <param name="filmtitel">titel van de film</param>
+        [HttpPut("VerwijderdDuim/{filmtitel}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult VerwijderDuim(string filmtitel)
+        {
+
+            Film film = _filmRepository.GetFilmByTitel(filmtitel);
+            if (film == null)
+            {
+                return NotFound();
+            }
+            _gebruikerRepository.VerwijderDuim(film);
+            _gebruikerRepository.SaveChanges();
+            return NoContent();
+        }
     }
-}
 }

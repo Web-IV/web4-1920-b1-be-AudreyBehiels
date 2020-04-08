@@ -20,6 +20,11 @@ namespace WebappsIV_1920_be_AudreyB.Data
             _dbFilmContext.Database.EnsureDeleted();
             if (_dbFilmContext.Database.EnsureCreated())
             {
+                Gebruiker gebruiker1 = new Gebruiker("Audrey", "Behiels", "Audrey.behiels@gmail.com");
+               
+                _dbFilmContext.Gebruikers.Add(gebruiker1);
+                _dbFilmContext.SaveChanges();
+
                 #region Acteurs
                 Acteur LeonardoDC = new Acteur("Leonardo DiCaprio");
                 Acteur KateW = new Acteur("Kate Winslet");

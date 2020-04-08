@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebappsIV_1920_be_AudreyB.Models
 {
-    public class Gebruiker
+    public class Gebruiker 
     {
         #region Properties
-        public int GerbuikerID { get; set; }
+        public int GebruikerID { get; set; }
         public string Voornaam { get; set; }
         public string Familienaam { get; set; }
         //  public string wachwoord { get; set; }

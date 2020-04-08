@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -41,10 +43,15 @@ namespace WebappsIV_1920_be_AudreyB
                 );
             services.AddDbContext<FilmContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("FilmContext")));
+
+             services.AddDefaultIdentity<IdentityUser>()
+                 .AddEntityFrameworkStores<FilmContext>().AddDefaultTokenProviders();
+                 
+            services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
-
+            IdentityModelEventSource.ShowPII = true;
             services.AddOpenApiDocument(s =>
             {
                 s.DocumentName = "API Film docs";
@@ -54,17 +61,17 @@ namespace WebappsIV_1920_be_AudreyB
                 s.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
                 {
                     Type = OpenApiSecuritySchemeType.ApiKey,
-                    Name = "Authorization",
+                    Name = "Authorizatie",
                     In = OpenApiSecurityApiKeyLocation.Header,
-                    Description = "Type into the textbox: Bearer {your JWT token}."
+                    Description = "Typ in het tekstvak: Bearer {jouw JWT token}."
                 });
-                s.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT")); //adds the token when a request is send
+                s.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT token")); //adds the token when a request is send
             });
-
 
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
                 {
@@ -76,7 +83,7 @@ namespace WebappsIV_1920_be_AudreyB
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
                         ValidateIssuer = false,
                         ValidateAudience = false,
-                        RequireExpirationTime = true //Ensure token hasn't expired
+                    RequireExpirationTime = true //Ensure token hasn't expired
                     };
                 });
 
@@ -95,18 +102,22 @@ namespace WebappsIV_1920_be_AudreyB
             app.UseHttpsRedirection();
 
             app.UseOpenApi();
-            app.UseSwaggerUi3();
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseMvc();
+
+            app.UseSwaggerUi3();
+
             app.UseCors("AllowAllOrigins");
 
-            app.UseEndpoints(endpoints =>
+            /*app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            });*/
             filmDataInitializer.InitializeData();
         }
     }

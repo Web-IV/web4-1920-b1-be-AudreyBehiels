@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using WebappsIV_1920_be_AudreyB.Models;
 
 namespace WebappsIV_1920_be_AudreyB.Data
 {
-    public class FilmContext : DbContext
+    public class FilmContext : IdentityDbContext<IdentityUser> //DbContext
     {
         public DbSet<Film> Films { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -17,6 +19,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
         public DbSet<FilmGenre> FilmGenres { get; set; }
         public DbSet<FilmSchrijver> FilmSchrijvers { get; set; }
         public DbSet<FilmActeur> FilmActeurs { get; set; }
+        public DbSet<Gebruiker> Gebruikers { get; set; }
 
         public FilmContext(DbContextOptions<FilmContext> options) : base(options)
         {
@@ -29,6 +32,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
             builder.ApplyConfiguration(new FilmGenreConfiguration());
             builder.ApplyConfiguration(new FilmSchrijverConfiguration());
             builder.ApplyConfiguration(new FilmActeurConfiguration());
+            builder.ApplyConfiguration(new GebruikerConfiguration());
 
         }
     }

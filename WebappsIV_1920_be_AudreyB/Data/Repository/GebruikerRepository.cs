@@ -12,12 +12,14 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
         #region Properties
         private readonly FilmContext _filmContext;
         private readonly DbSet<Film> _films;
+        private readonly DbSet<Gebruiker> _gebruikers;
 
         #region Constructor
         public GebruikerRepository(FilmContext dbFilmContext)
         {
             _filmContext = dbFilmContext;
             _films = dbFilmContext.Films;
+            _gebruikers = dbFilmContext.Gebruikers;
         }
         #endregion
 
@@ -33,14 +35,20 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
             film.VerwijderDuim();
         }
 
+        public void ToevoegenGebruiker(Gebruiker gerbuiker)
+        {
+            _filmContext.Gebruikers.Add(gerbuiker);
+           // _gebruikers.Add(gerbuiker);
+        }
         public void SaveChanges()
         {
             _filmContext.SaveChanges();
 
         }
-      /*  public void AddFilmToOwnList(string titel)
-        {
 
-        }*/
+        /*  public void AddFilmToOwnList(string titel)
+ {
+
+ }*/
     }
 }
