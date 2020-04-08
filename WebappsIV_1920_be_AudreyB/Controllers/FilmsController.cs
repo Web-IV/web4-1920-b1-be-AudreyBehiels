@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebappsIV_1920_be_AudreyB.Models;
 
@@ -29,6 +30,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// Geeft alle films 
         /// </summary>
         /// <returns>array van films</returns>
+        [AllowAnonymous]
         [HttpGet("")]
         public IEnumerable<Film> GetFilms()
         {
@@ -46,6 +48,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="titel">Titel van de film</param>
         /// <returns>De film</returns>
+        [AllowAnonymous]
         [HttpGet("GetFilmByTitle/{titel}")]
         public ActionResult<Film> GetFilmByTitle(string titel)
         {
@@ -66,6 +69,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="jaar">jaar van de film</param>
         /// <returns>array van films</returns>
+        [AllowAnonymous]
         [HttpGet("GetFilmsByJaar/{jaar}")]
         public IEnumerable<Film> GetFilmsByJaar(int jaar)
         {
@@ -82,6 +86,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="genre">genre naam</param>
         /// <returns>array van films</returns>
+        [AllowAnonymous]
         [HttpGet("GetFilmsByGenre/{genre}")]
         public IEnumerable<Film> GetFilmsByGenre(string genre)
         {
