@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebappsIV_1920_be_AudreyB.DTOs;
 using WebappsIV_1920_be_AudreyB.Models;
 
 namespace WebappsIV_1920_be_AudreyB.Controllers
@@ -32,9 +33,22 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns>array van films</returns>
         [AllowAnonymous]
         [HttpGet("")]
-        public IEnumerable<Film> GetFilms()
+        public IEnumerable<FilmDTO> GetFilms()
         {
-            IEnumerable<Film> films = _filmRepository.GetAllFilms();
+            IEnumerable<FilmDTO> films = _filmRepository.GetAllFilms()
+                .Select(film => new FilmDTO()
+                {
+                    FilmID = film.FilmId,
+                    Titel = film.Titel,
+                    Jaar = film.Jaar,
+                    Duur = film.Duur,
+                    Regisseur = film.Regisseur,
+                    FilmGenres = film.FilmGenres,
+                    FilmActeurs = film.FilmActeurs,
+                    FilmSchrijvers = film.FilmSchrijvers,
+                    KortInhoud = film.KortInhoud,
+                    Productiebedrijf = film.Productiebedrijf
+                });
             if (films == null)
             {
                 throw new ArgumentNullException("Geen films");
@@ -50,7 +64,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns>De film</returns>
         [AllowAnonymous]
         [HttpGet("GetFilmByTitle/{titel}")]
-        public ActionResult<Film> GetFilmByTitle(string titel)
+        public ActionResult<FilmDTO> GetFilmByTitle(string titel)
         {
             Film film = _filmRepository.GetFilmByTitel(titel);
             if (film == null)
@@ -59,7 +73,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             }
             else
             {
-                return film;
+                return new FilmDTO(film);
             }
         }
 
@@ -71,9 +85,22 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns>array van films</returns>
         [AllowAnonymous]
         [HttpGet("GetFilmsByJaar/{jaar}")]
-        public IEnumerable<Film> GetFilmsByJaar(int jaar)
+        public IEnumerable<FilmDTO> GetFilmsByJaar(int jaar)
         {
-            IEnumerable<Film> films = _filmRepository.GetFilmsByYear(jaar);
+            IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByYear(jaar)
+                .Select(film => new FilmDTO()
+            {
+                FilmID = film.FilmId,
+                Titel = film.Titel,
+                Jaar = film.Jaar,
+                Duur = film.Duur,
+                Regisseur = film.Regisseur,
+                FilmGenres = film.FilmGenres,
+                FilmActeurs = film.FilmActeurs,
+                FilmSchrijvers = film.FilmSchrijvers,
+                KortInhoud = film.KortInhoud,
+                Productiebedrijf = film.Productiebedrijf
+            }); ;
             if (films == null)
             {
                 throw new ArgumentNullException("Geen films");
@@ -88,9 +115,22 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns>array van films</returns>
         [AllowAnonymous]
         [HttpGet("GetFilmsByGenre/{genre}")]
-        public IEnumerable<Film> GetFilmsByGenre(string genre)
+        public IEnumerable<FilmDTO> GetFilmsByGenre(string genre)
         {
-            IEnumerable<Film> films =_filmRepository.GetFilmsByGenre(genre);
+            IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByGenre(genre)
+                .Select(film => new FilmDTO()
+                {
+                    FilmID = film.FilmId,
+                    Titel = film.Titel,
+                    Jaar = film.Jaar,
+                    Duur = film.Duur,
+                    Regisseur = film.Regisseur,
+                    FilmGenres = film.FilmGenres,
+                    FilmActeurs = film.FilmActeurs,
+                    FilmSchrijvers = film.FilmSchrijvers,
+                    KortInhoud = film.KortInhoud,
+                    Productiebedrijf = film.Productiebedrijf
+                });
             if (films == null)
             {
                 throw new ArgumentNullException("Geen films");
