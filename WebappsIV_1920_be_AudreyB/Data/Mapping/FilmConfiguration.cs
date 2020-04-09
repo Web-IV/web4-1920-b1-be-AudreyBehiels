@@ -18,7 +18,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Mapping
             builder.Property(f => f.Jaar).IsRequired();
             builder.Property(f => f.Regisseur).IsRequired();
             builder.Property(f => f.Productiebedrijf).IsRequired();
-            builder.Property(f => f.KortInhoud).IsRequired();
+            builder.Property(f => f.KorteInhoud).IsRequired();
             builder.Property(f => f.AantalDuimenOmhoog);
 
 

@@ -21,7 +21,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public ICollection<FilmSchrijver> FilmSchrijvers { get; set; }
         public ICollection<FilmActeur> FilmActeurs { get; set; }
         public string Productiebedrijf { get; set; }
-        public string KortInhoud { get; set; }
+        public string KorteInhoud { get; set; }
         public int AantalDuimenOmhoog { get; set; }
         // Film affiche  
         #endregion
@@ -34,7 +34,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.Jaar = jaar;
             this.Duur = duur;
             this.Regisseur = regisseur;
-            this.KortInhoud = korteInhoud;
+            this.KorteInhoud = korteInhoud;
             this.Productiebedrijf = productiebedrijf;
             this.FilmGenres = new List<FilmGenre>();
             this.FilmSchrijvers = new List<FilmSchrijver>();

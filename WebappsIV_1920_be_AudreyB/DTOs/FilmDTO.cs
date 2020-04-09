@@ -16,7 +16,7 @@ namespace WebappsIV_1920_be_AudreyB.DTOs
         public string Regisseur { get; set; }
         public ICollection<FilmSchrijver> FilmSchrijvers { get; set; }
         public ICollection<FilmActeur> FilmActeurs { get; set; }
-        public string KortInhoud { get; set; }
+        public string KorteInhoud { get; set; }
         public string Productiebedrijf { get; set; }
 
         public FilmDTO() { }
@@ -31,7 +31,7 @@ namespace WebappsIV_1920_be_AudreyB.DTOs
             Regisseur = film.Regisseur;
             FilmSchrijvers = film.FilmSchrijvers;
             FilmActeurs = film.FilmActeurs;
-            KortInhoud = film.KortInhoud;
+            KorteInhoud = film.KorteInhoud;
             Productiebedrijf = film.Productiebedrijf;
 
 

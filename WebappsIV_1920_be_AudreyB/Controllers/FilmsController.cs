@@ -46,7 +46,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                     FilmGenres = film.FilmGenres,
                     FilmActeurs = film.FilmActeurs,
                     FilmSchrijvers = film.FilmSchrijvers,
-                    KortInhoud = film.KortInhoud,
+                    KorteInhoud = film.KorteInhoud,
                     Productiebedrijf = film.Productiebedrijf
                 });
             if (films == null)
@@ -98,7 +98,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                 FilmGenres = film.FilmGenres,
                 FilmActeurs = film.FilmActeurs,
                 FilmSchrijvers = film.FilmSchrijvers,
-                KortInhoud = film.KortInhoud,
+                KorteInhoud = film.KorteInhoud,
                 Productiebedrijf = film.Productiebedrijf
             }); ;
             if (films == null)
@@ -128,7 +128,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                     FilmGenres = film.FilmGenres,
                     FilmActeurs = film.FilmActeurs,
                     FilmSchrijvers = film.FilmSchrijvers,
-                    KortInhoud = film.KortInhoud,
+                    KorteInhoud = film.KorteInhoud,
                     Productiebedrijf = film.Productiebedrijf
                 });
             if (films == null)
