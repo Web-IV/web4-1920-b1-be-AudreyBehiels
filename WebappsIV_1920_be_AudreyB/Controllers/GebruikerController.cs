@@ -62,6 +62,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             return BadRequest();
         }
 
+        [AllowAnonymous]
         private String GetToken(IdentityUser user)
         {      // Create the token
             var claims = new[] {
@@ -73,6 +74,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             var token = new JwtSecurityToken(null, null, claims, expires: DateTime.Now.AddMinutes(60), signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
         [AllowAnonymous]
         [HttpPost("registreer")]
         public async Task<ActionResult<String>> Registreer(RegisterDTO model)
@@ -109,9 +111,10 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             {
                 return NotFound();
             }
+                    _gebruikerRepository.VoegDuimToe(film);
+                    _gebruikerRepository.SaveChanges();
+                    _filmRepository.SaveChanges();
 
-            _gebruikerRepository.VoegDuimToe(film);
-            _gebruikerRepository.SaveChanges();
             return NoContent();
         }
 
@@ -121,7 +124,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="filmtitel">titel van de film</param>
         [HttpPut("VerwijderdDuim/{filmtitel}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+     //   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult VerwijderDuim(string filmtitel)
         {
 

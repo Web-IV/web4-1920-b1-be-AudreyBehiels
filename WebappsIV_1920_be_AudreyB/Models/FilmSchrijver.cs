@@ -13,7 +13,6 @@ namespace WebappsIV_1920_be_AudreyB.Models
         private int _filmID;
         private int _schrijverID;
         private string _schrijverNaam;
-
         #endregion
 
         #region Properties

@@ -31,7 +31,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
          
         }
         public void VerwijderDuim(Film film)
-        {
+        { 
             film.VerwijderDuim();
         }
 
@@ -44,6 +44,12 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
         {
             _filmContext.SaveChanges();
 
+        }
+
+
+        public Gebruiker GetGebruikerByEmail(string mailadres)
+        {
+            return _filmContext.Gebruikers.SingleOrDefault(g => g.Mailadres.Equals(mailadres));
         }
 
         /*  public void AddFilmToOwnList(string titel)

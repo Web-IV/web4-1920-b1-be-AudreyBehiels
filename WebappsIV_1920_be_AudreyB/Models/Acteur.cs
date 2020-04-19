@@ -14,7 +14,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         [JsonIgnore]
         public Film Film { get; set; }
         [JsonIgnore]
-        public ICollection<FilmActeur> FilmsActeurs { get; set; }
+        public ICollection<FilmActeur> FilmActeurs { get; set; }
         #endregion
 
         #region Constructors
@@ -22,7 +22,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public Acteur(string naam)
         {
             this.Acteurnaam = naam;
-            this.FilmsActeurs = new List<FilmActeur>();
+            this.FilmActeurs = new List<FilmActeur>();
         } 
         #endregion
     }

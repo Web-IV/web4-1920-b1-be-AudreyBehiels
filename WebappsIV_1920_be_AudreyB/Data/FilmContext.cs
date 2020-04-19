@@ -33,6 +33,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
             builder.ApplyConfiguration(new FilmSchrijverConfiguration());
             builder.ApplyConfiguration(new FilmActeurConfiguration());
             builder.ApplyConfiguration(new GebruikerConfiguration());
+            builder.ApplyConfiguration(new FilmGebruikerConfiguration());
 
         }
     }

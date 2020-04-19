@@ -22,7 +22,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Mapping
             builder.HasOne(fg => fg.Film).WithMany(fg => fg.FilmActeurs)
                     .HasForeignKey(us => us.FilmID).OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(fg => fg.Acteur).WithMany(fg => fg.FilmsActeurs)
+            builder.HasOne(fg => fg.Acteur).WithMany(fg => fg.FilmActeurs)
                 .HasForeignKey(us => us.ActeurID).OnDelete(DeleteBehavior.Cascade);
 
 

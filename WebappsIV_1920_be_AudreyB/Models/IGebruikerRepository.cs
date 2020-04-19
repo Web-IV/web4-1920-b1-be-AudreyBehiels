@@ -10,6 +10,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
        void ToevoegenGebruiker(Gebruiker gerbuiker);
         void VoegDuimToe(Film film);
         void VerwijderDuim(Film film);
+        Gebruiker GetGebruikerByEmail(string mailadres);
         //  void AddFilmToOwnList(string titel);
 
         void SaveChanges();

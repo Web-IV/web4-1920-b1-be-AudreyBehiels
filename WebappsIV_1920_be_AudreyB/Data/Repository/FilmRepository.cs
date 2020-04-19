@@ -77,6 +77,11 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                .Where(s => s.Jaar.Equals(jaar)).ToList();
         }
 
+        public IEnumerable<Genre> GetAllGenres()
+        {
+            return _filmContext.Genres;
+        }
+
         public void SaveChanges()
         {
             _filmContext.SaveChanges();

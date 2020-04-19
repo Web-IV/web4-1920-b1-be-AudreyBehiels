@@ -17,7 +17,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
         }
         public void InitializeData()
         {
-            _dbFilmContext.Database.EnsureDeleted();
+           // _dbFilmContext.Database.EnsureDeleted();
             if (_dbFilmContext.Database.EnsureCreated())
             {
                 Gebruiker gebruiker1 = new Gebruiker("Audrey", "Behiels", "Audrey.behiels@gmail.com");
@@ -42,9 +42,18 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 Acteur GeraldMcR = new Acteur("Gerald McRaney");
                 Acteur ChrisE = new Acteur("Chris Eastman");
                 Acteur DarrylC = new Acteur("Darryl Cooksey");
+                Acteur TimR = new Acteur("Tim Robbins"); 
+                Acteur MorganF = new Acteur("Morgan Freeman");
+                Acteur BobG = new Acteur("Bob Gunton");
+                Acteur WilliamS = new Acteur("William Sadler");
+                Acteur AmandaS = new Acteur("Amanda Seyfried");
+                Acteur StellanS = new Acteur("Stellan Skarsgård");
+                Acteur PierceB = new Acteur("Pierce Brosnan");
+                Acteur NancyB = new Acteur("Nancy Baldwin");
+              
                 #endregion
                 _dbFilmContext.Acteurs.AddRange(LeonardoDC, KateW, KathyB, BillyZ, KevinB, LoriS, JohnL, DiannaW, BarretO, GeraldMcR, ChrisE,
-                   DarrylC );
+                   DarrylC, TimR, MorganF, BobG,WilliamS, AmandaS, StellanS, PierceB, NancyB  );
                 _dbFilmContext.SaveChanges();
 
                 #region Genres
@@ -87,9 +96,11 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 Schrijver DeanP = new Schrijver("Dean Pitchford");
                 Schrijver GeorgeL = new Schrijver("George Lucas");
                 Schrijver WolfgangP = new Schrijver("Wolfgang Petersen");
-                Schrijver HermanW = new Schrijver("Herman Weigel"); 
+                Schrijver HermanW = new Schrijver("Herman Weigel");
+                Schrijver FrankD = new Schrijver("Frank Darabont");
+                Schrijver CatherineJ = new Schrijver("Catherine Johnson"); 
                 #endregion
-                _dbFilmContext.Schrijvers.AddRange(new Schrijver[] { JamesC, DeanP, GeorgeL, WolfgangP, HermanW});
+                _dbFilmContext.Schrijvers.AddRange(new Schrijver[] { JamesC, DeanP, GeorgeL, WolfgangP, HermanW, FrankD, CatherineJ });
                 _dbFilmContext.SaveChanges();
 
                 // string titel, int jaar, int duur, string regiseur, string korteInhoud, string productie)
@@ -122,6 +133,8 @@ namespace WebappsIV_1920_be_AudreyB.Data
                      "De film gaat over de tiener Ren die met zijn moeder van Chicago (Illinois) naar Bomont verhuist. " +
                      "Hij maakt nieuwe vrienden, ook de mooie Ariel heeft vanaf het begin zijn aandacht. Ren is bezeten door muziek en dansen, en dat is in Bomont verboden. " +
                      "Dominee Moore is er tegen omdat zijn zoon na een nachtje fuiven is omgekomen in een ongeval. Ren blijft volhouden en kan de dominee, de vader van Ariel, overtuigen een dansavond te organiseren.", "Paramount Home Video");
+
+                _dbFilmContext.Films.Add(Footloose);
                 FilmGenre fg3 = new FilmGenre(Footloose, Drama);
                 FilmGenre fg4 = new FilmGenre(Footloose, Romantiek);
                 FilmGenre fg5 = new FilmGenre(Footloose, Musical);
@@ -141,8 +154,11 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.FilmSchrijvers.Add(fs2);
                 _dbFilmContext.SaveChanges();
 
-                Film StarWarsEIV = new Film("Star Wars: Episode IV - A New Hope", 1977, 121, "George Lucas", /*new List<string> { "George Lucas" },*/
-                    "Luke Skywalker werkt op het land bij z'n oom en tante op de planeet Tatooine. Als zij door Keizerlijke troepen worden vermoord, sluit Luke zich aan bij de groep rebellen die vecht tegen de tirannie van de Keizer en de slechte Darth Vader. Luke, Princess Leia, Han Solo en de andere rebellen doen een poging de Death Star, het nieuwe wapen van de Keizer, te vernietigen.", "20th Century Fox");
+                Film StarWarsEIV = new Film("Star Wars, Episode IV - A New Hope", 1977, 121, "George Lucas", /*new List<string> { "George Lucas" },*/
+                    "Luke Skywalker werkt op het land bij z'n oom en tante op de planeet Tatooine. Als zij door Keizerlijke troepen worden vermoord, sluit Luke zich aan bij de groep rebellen die vecht tegen de tirannie van de Keizer en de slechte Darth Vader. " +
+                    "Luke, Princess Leia, Han Solo en de andere rebellen doen een poging de Death Star, het nieuwe wapen van de Keizer, te vernietigen.", "20th Century Fox");
+
+                _dbFilmContext.Films.Add(StarWarsEIV);
                 FilmGenre fg7 = new FilmGenre(StarWarsEIV, Actie);
                 FilmGenre fg8 = new FilmGenre(StarWarsEIV, Avontuur);
                 FilmGenre fg9 = new FilmGenre(StarWarsEIV, Fantasie);
@@ -161,9 +177,11 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 FilmSchrijver fs3 = new FilmSchrijver(StarWarsEIV, GeorgeL);
                 _dbFilmContext.FilmSchrijvers.Add(fs3);
                 _dbFilmContext.SaveChanges();
-
+                       
                 Film TheNeverEndingStory = new Film("The NeverEnding Story", 1984,102, "Wolfgang Petersen",/* new List<string> { "Wolfgang Petersen", "Herman Weigel" },*/
                    "Shy, awkward Bastian is amazed to discover that he has become a character in the mysterious book he is reading and that he has an important mission to fulfill.", "Warner Home Video");
+
+                _dbFilmContext.Films.Add(TheNeverEndingStory);
                 FilmGenre fg11 = new FilmGenre(TheNeverEndingStory, Avontuur);
                 FilmGenre fg12 = new FilmGenre(TheNeverEndingStory, Familie);
                 FilmGenre fg13 = new FilmGenre(TheNeverEndingStory, Drama);
@@ -183,28 +201,49 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.FilmSchrijvers.AddRange(new FilmSchrijver[] { fs4, fs5 });
                 _dbFilmContext.SaveChanges();
 
-                //  FilmGenre fg5 = new FilmGenre(TheNeverEndingStory, new List<string> { "Avontuur", "Drama", "Fantasie", "Familie" });
-                // FilmSchrijver fs5 = new FilmSchrijver(TheNeverEndingStory, new List<string> { "Wolfgang Petersen", "Herman Weigel" });
-                // FilmActeur fa5 = new FilmActeur(TheNeverEndingStory, new List<string> { "Barret Oliver", "Gerald McRaney", "Chris Eastman", "Darryl Cooksey" });
+                Film TheShawshankRedemption = new Film("The Shawshank Redemption",1994, 142,/*new List<string> {  }, */  "Frank Darabont",/* new List<string> { "Frank Darabont" },*/
+                     "Andy Dufresne (Tim Robbins) wordt beschuldigd van de moord op zijn vrouw en haar minnaar. Hij houdt vol dat hij onschuldig is, maar krijgt toch tweemaal levenslang in de strenge gevangenis Shawshank." +
+                     " Hij raakt bevriend met de zwarte medegevangene Ellis Boyd Redding (Morgan Freeman), die voor iedereen spullen kan regelen en de bijnaam 'Red' heeft. En er zijn nog twee dingen die Andy op de been houden: hoop en een poster van Rita Hayworth.", "Columbia Pictures");
+                _dbFilmContext.Films.Add(TheShawshankRedemption);
+                FilmGenre fg15 = new FilmGenre(TheShawshankRedemption, Drama);
+                _dbFilmContext.FilmGenres.Add(fg15);
+                _dbFilmContext.SaveChanges();
 
+                FilmActeur fa17 = new FilmActeur(TheShawshankRedemption, TimR);
+                FilmActeur fa18 = new FilmActeur(TheShawshankRedemption, MorganF);
+                FilmActeur fa19 = new FilmActeur(TheShawshankRedemption, BobG);
+                FilmActeur fa20 = new FilmActeur(TheShawshankRedemption, WilliamS);
+                _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa17, fa18, fa19, fa20 });
+                _dbFilmContext.SaveChanges();
+              
+                FilmSchrijver fs6 = new FilmSchrijver(TheShawshankRedemption, FrankD);
+                _dbFilmContext.FilmSchrijvers.Add(fs6 );
+                _dbFilmContext.SaveChanges();
 
-                //  FilmGenre fg4 = new FilmGenre(StarWarsEIV, new List<string> { "Actie", "Avontuur", "Fantasie", "Sciencefiction" });
-                // FilmSchrijver fs4 = new FilmSchrijver(StarWarsEIV, new List<string> { "George Lucas" });
-                // FilmActeur fa4 = new FilmActeur(StarWarsEIV, new List<string> { "Mark Hamill", "Harrison Ford", "Carrie Fisher", "Peter Cushing" });
+                Film MammaMia = new Film("Mamma Mia!", 2008, 108,/*  new List<string> { "Amanda Seyfried", "Stellan Skarsgård", "Pierce Brosnan", "Nancy Baldwin" }, */ "Phyllida Lloyd", /*new List<string> { "Catherine Johnson" },*/
+                    "Donna, een onafhankelijke, single moeder heeft een hotelletje op een idyllisch Grieks eiland. Ze staat op het punt om Sophie, de pittige dochter die ze alleen heeft grootgebracht, los te laten." +
+                    " Voor Sophie's huwelijk heeft Donna haar twee oude hartsvrienden uitgenodigd: de praktische en no-nonsense Rosie en de rijke, meermalen gescheiden Tanya van haar vroegere backing-band 'Donna and the Dynamos'. Maar Sophie heeft in het geheim zelf drie gasten uitgenodigd. " +
+                    "Ze is op zoek gegaan naar de identiteit van haar vader die haar naar het altaar moet begeleiden en ze haalt drie mannen uit Donna's verleden naar het mediterrane paradijs waar ze 20 jaar daarvoor waren geweest." +
+                    " In de 24 chaotische, magische uren bloeit er nieuwe liefde op en oude romances vatten opnieuw vlam op dit weelderige eiland vol mogelijkheden.", "Universal Pictures");
+                _dbFilmContext.Films.Add(MammaMia);
+                FilmGenre fg16 = new FilmGenre(MammaMia, Romantiek);
+                FilmGenre fg17 = new FilmGenre(MammaMia, Komedie);
+                FilmGenre fg18 = new FilmGenre(MammaMia, Musical);
+                FilmGenre fg19 = new FilmGenre(MammaMia, Muziek);
+                _dbFilmContext.FilmGenres.AddRange(new FilmGenre[] { fg16, fg17, fg18, fg19 });
+                _dbFilmContext.SaveChanges();
 
+                FilmSchrijver fs7 = new FilmSchrijver(MammaMia, CatherineJ);
+                _dbFilmContext.FilmSchrijvers.Add(fs7);
+                _dbFilmContext.SaveChanges();
 
-                // Film TheShawshankRedemption = new Film("The Shawshank Redemption", new DateTime(1994), new DateTime(0, 0, 0, 0, 142, 0),/* new List<string> {"Drama"},new List<string> { "Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler" }, */  "Frank Darabont",/* new List<string> { "Frank Darabont" },*/
-                //      "Andy Dufresne (Tim Robbins) wordt beschuldigd van de moord op zijn vrouw en haar minnaar. Hij houdt vol dat hij onschuldig is, maar krijgt toch tweemaal levenslang in de strenge gevangenis Shawshank. Hij raakt bevriend met de zwarte medegevangene Ellis Boyd Redding (Morgan Freeman), die voor iedereen spullen kan regelen en de bijnaam 'Red' heeft. En er zijn nog twee dingen die Andy op de been houden: hoop en een poster van Rita Hayworth.", "Columbia Pictures");
-                // FilmGenre fg3 = new FilmGenre(TheShawshankRedemption, new List<string> { "Drama" });
-                // FilmSchrijver fs3 = new FilmSchrijver(TheShawshankRedemption,new List<string>{ "Frank Darabont" } );
-                // FilmActeur fa3 = new FilmActeur(TheShawshankRedemption, new List<string> { "Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler" });
-
-
-                // Film MammaMia = new Film("Mamma Mia!", new DateTime(2008), new DateTime(0, 0, 0, 0, 108, 0),/* new List<string> { "Romantiek", "Komedie","Musical","Muziek"},  new List<string> { "Amanda Seyfried", "Stellan Skarsgård", "Pierce Brosnan", "Nancy Baldwin" }, */ "Phyllida Lloyd", /*new List<string> { "Catherine Johnson" },*/
-                //     "Donna, een onafhankelijke, single moeder heeft een hotelletje op een idyllisch Grieks eiland. Ze staat op het punt om Sophie, de pittige dochter die ze alleen heeft grootgebracht, los te laten. Voor Sophie's huwelijk heeft Donna haar twee oude hartsvrienden uitgenodigd: de praktische en no-nonsense Rosie en de rijke, meermalen gescheiden Tanya van haar vroegere backing-band 'Donna and the Dynamos'. Maar Sophie heeft in het geheim zelf drie gasten uitgenodigd. " +
-                //     "Ze is op zoek gegaan naar de identiteit van haar vader die haar naar het altaar moet begeleiden en ze haalt drie mannen uit Donna's verleden naar het mediterrane paradijs waar ze 20 jaar daarvoor waren geweest. In de 24 chaotische, magische uren bloeit er nieuwe liefde op en oude romances vatten opnieuw vlam op dit weelderige eiland vol mogelijkheden.", "Universal Pictures");
-                // FilmGenre fg6 = new FilmGenre(MammaMia, new List<string> { "Romantiek", "Komedie", "Musical", "Muziek" });
-                // FilmSchrijver fs6 = new FilmSchrijver(MammaMia, new List<string> { "Catherine Johnson" });
+                FilmActeur fa21 = new FilmActeur(MammaMia, AmandaS);
+                FilmActeur fa22 = new FilmActeur(MammaMia, StellanS);
+                FilmActeur fa23 = new FilmActeur(MammaMia, PierceB);
+                FilmActeur fa24 = new FilmActeur(MammaMia, NancyB);
+                _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa21, fa22, fa23, fa24 });
+                _dbFilmContext.SaveChanges();
+              
                 // FilmActeur fa6 = new FilmActeur(MammaMia, new List<string> { "Amanda Seyfried", "Stellan Skarsgård", "Pierce Brosnan", "Nancy Baldwin" });
 
                 // Film TheLordOfTheRings1 = new Film("The Lord of the Rings: The Fellowship of the Ring", new DateTime(2001), new DateTime(0, 0, 0, 0, 178, 0),/* new List<string> { "Avontuur", "Actie", "Fantasie", "Drama" }, new List<string> { "Alan Howard", "Noel Appleby", "Sean Astin", "Sala Baker" }, */ "Peter Jackson",/* new List<string> { "J.R.R. Tolkien"},*/

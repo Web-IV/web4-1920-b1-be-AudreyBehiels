@@ -56,6 +56,24 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             return films;
         }
 
+        //GET: api/Films/GetGenres
+        /// <summary>
+        /// Geeft alle genres
+        /// </summary>
+        /// <returns>array van genres</returns>
+        [AllowAnonymous]
+        [HttpGet("GetGenres")]
+        public IEnumerable<GenreDTO> GetGenres()
+        {
+            IEnumerable<GenreDTO> genres = _filmRepository.GetAllGenres()
+               .Select(genre => new GenreDTO()
+               {
+                   Genrenaam = genre.Naam
+               });
+              return genres;
+
+        } 
+
         //GET: api/Films/GetFilmByTitle/Titanic
         /// <summary>
         /// Geeft de film met de gegeven titel

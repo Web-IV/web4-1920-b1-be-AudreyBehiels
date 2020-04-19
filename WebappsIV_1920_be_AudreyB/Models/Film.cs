@@ -23,6 +23,8 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public string Productiebedrijf { get; set; }
         public string KorteInhoud { get; set; }
         public int AantalDuimenOmhoog { get; set; }
+        public ICollection<FilmGebruiker> FilmGebruikers { get;  set; }
+
         // Film affiche  
         #endregion
 
@@ -49,7 +51,12 @@ namespace WebappsIV_1920_be_AudreyB.Models
         /// </summary>
         public void VoegDuimToe()
         {
-            AantalDuimenOmhoog++;
+            
+                /*FilmGebruiker filmGebruiker = new FilmGebruiker(this, gebruiker);
+                gebruiker.FilmGebruikers.Add(filmGebruiker);
+                FilmGebruikers.Add(filmGebruiker);*/
+                AantalDuimenOmhoog++;
+
         }
         public void VerwijderDuim()
         {
