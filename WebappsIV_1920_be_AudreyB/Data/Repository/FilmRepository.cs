@@ -42,12 +42,12 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
 
         }
 
-        public IEnumerable<Film> GetFilmsByTitel(string titel)
+        public IEnumerable<Film> GetFilmsByTitelStartsWith(string titel)
         {
             return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
                 .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
-                .Where(s => s.Titel.ToLower().Equals(titel.ToLower())).ToList();
+                .Where(s => s.Titel.ToLower().StartsWith(titel.ToLower())).ToList();
         }
 
         public IEnumerable<Film> GetFilmsByGenre(string genre)

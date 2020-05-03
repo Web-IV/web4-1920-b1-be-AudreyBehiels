@@ -9,7 +9,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
     {
         IEnumerable<Film> GetAllFilms();
         Film GetFilmByTitel(string titel);
-        IEnumerable<Film> GetFilmsByTitel(string titel);
+        IEnumerable<Film> GetFilmsByTitelStartsWith(string titel);
         IEnumerable<Film> GetFilmsByYear(int jaar);
         IEnumerable<Film> GetFilmsByGenre(string genre);
         IEnumerable<Genre> GetAllGenres();

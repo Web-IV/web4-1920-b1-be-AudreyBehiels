@@ -49,7 +49,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                 });
             if (films == null)
             {
-                 throw new ArgumentNullException("Geen films");
+                throw new ArgumentNullException("Geen films");
             }
             return films;
         }
@@ -68,8 +68,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                {
                    Genrenaam = genre.Naam
                });
-              return genres;
-        } 
+            return genres;
+        }
 
         //GET: api/Films/GetFilmByTitle/Titanic
         /// <summary>
@@ -92,6 +92,38 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             }
         }
 
+        //GET: api/Films/GetFilmByTitleStartsWith/Ti
+        /// <summary>
+        /// geeft de films die starten met de gegeven letters
+        /// </summary>
+        /// <param name="titel">Titel van de film</param>
+        /// <returns>array van films</returns>
+        [HttpGet("GetFilmsByTitleStartsWith/{titel}")]
+        [AllowAnonymous]
+        public IEnumerable<FilmDTO> GetFilmsByTitleStartsWith(string titel)
+        {
+            IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByTitelStartsWith(titel)
+                .Select(film => new FilmDTO()
+                {
+                    FilmID = film.FilmId,
+                    Titel = film.Titel,
+                    Jaar = film.Jaar,
+                    Duur = film.Duur,
+                    Regisseur = film.Regisseur,
+                    FilmGenres = film.FilmGenres,
+                    FilmActeurs = film.FilmActeurs,
+                    FilmSchrijvers = film.FilmSchrijvers,
+                    KorteInhoud = film.KorteInhoud,
+                    Productiebedrijf = film.Productiebedrijf
+                });
+            if (films == null)
+            {
+                throw new ArgumentNullException("Geen films");
+            }
+            return films;
+
+        }
+
         //GET: api/Films/GetFilmByJaar/1984
         /// <summary>
         /// Geeft alle films met het juiste jaar
@@ -104,18 +136,18 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         {
             IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByYear(jaar)
                 .Select(film => new FilmDTO()
-            {
-                FilmID = film.FilmId,
-                Titel = film.Titel,
-                Jaar = film.Jaar,
-                Duur = film.Duur,
-                Regisseur = film.Regisseur,
-                FilmGenres = film.FilmGenres,
-                FilmActeurs = film.FilmActeurs,
-                FilmSchrijvers = film.FilmSchrijvers,
-                KorteInhoud = film.KorteInhoud,
-                Productiebedrijf = film.Productiebedrijf
-            }); ;
+                {
+                    FilmID = film.FilmId,
+                    Titel = film.Titel,
+                    Jaar = film.Jaar,
+                    Duur = film.Duur,
+                    Regisseur = film.Regisseur,
+                    FilmGenres = film.FilmGenres,
+                    FilmActeurs = film.FilmActeurs,
+                    FilmSchrijvers = film.FilmSchrijvers,
+                    KorteInhoud = film.KorteInhoud,
+                    Productiebedrijf = film.Productiebedrijf
+                }); ;
             if (films == null)
             {
                 throw new ArgumentNullException("Geen films");
@@ -153,23 +185,5 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             return films;
         }
 
-        /// <summary>
-        /// Geeft alle films met de juiste titel
-        /// </summary>
-        /// <param name="titel">Titel van de film</param>
-        /// <returns>array van films</returns>
-        //[HttpGet("GetFilmsByTitle/{titel}")]
-        //public IEnumerable<Film> GetFilmsByTitle(string titel)
-        //{
-        //    IEnumerable<Film> films = _filmRepository.GetFilmsByTitel(titel);
-        //    if (string.IsNullOrEmpty(titel))
-        //    {
-        //        return _filmRepository.GetAllFilms();
-        //    }
-        //    else
-        //    {
-        //        return films;
-        //    }
-        //}
     }
 }
