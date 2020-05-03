@@ -16,7 +16,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #endregion
 
         #region Properties
-            [JsonIgnore]
+        [JsonIgnore]
         public Film Film { get; set; }
         [JsonIgnore]
         public Genre Genre { get; set; }

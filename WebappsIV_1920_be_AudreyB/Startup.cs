@@ -38,19 +38,39 @@ namespace WebappsIV_1920_be_AudreyB
         {
             services.AddControllers();
             // services.AddSwaggerDocument();
-            services.AddControllers().AddNewtonsoftJson(options =>
+           services.AddControllers().AddNewtonsoftJson(options =>
              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
+                ); // nodig voor niet te diep in een loop te gereken
             services.AddDbContext<FilmContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("FilmContext")));
 
-             services.AddDefaultIdentity<IdentityUser>()
-                 .AddEntityFrameworkStores<FilmContext>().AddDefaultTokenProviders();
-                 
+             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<FilmContext>();
+               
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+            });
+
             IdentityModelEventSource.ShowPII = true;
             services.AddOpenApiDocument(s =>
             {
@@ -102,23 +122,22 @@ namespace WebappsIV_1920_be_AudreyB
             app.UseHttpsRedirection();
 
             app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMvc();
-
-            app.UseSwaggerUi3();
+           // app.UseMvc();
 
             app.UseCors("AllowAllOrigins");
 
-            /*app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });*/
-            filmDataInitializer.InitializeData();
+            });
+            filmDataInitializer.InitializeData().Wait();
         }
     }
 }

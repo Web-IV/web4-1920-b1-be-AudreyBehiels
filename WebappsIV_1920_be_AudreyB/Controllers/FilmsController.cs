@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebappsIV_1920_be_AudreyB.DTOs;
@@ -12,15 +13,12 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class FilmsController : ControllerBase
     {
         private readonly IFilmRepository _filmRepository;
 
-        /// <summary>
-        /// FilmController
-        /// </summary>
-        /// <param name="context">Object FilmRepository interface</param>
         public FilmsController(IFilmRepository context)
         {
             _filmRepository = context;
@@ -31,8 +29,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// Geeft alle films 
         /// </summary>
         /// <returns>array van films</returns>
-        [AllowAnonymous]
         [HttpGet("")]
+        [AllowAnonymous]
         public IEnumerable<FilmDTO> GetFilms()
         {
             IEnumerable<FilmDTO> films = _filmRepository.GetAllFilms()
@@ -51,7 +49,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                 });
             if (films == null)
             {
-                throw new ArgumentNullException("Geen films");
+                 throw new ArgumentNullException("Geen films");
             }
             return films;
         }
@@ -61,8 +59,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// Geeft alle genres
         /// </summary>
         /// <returns>array van genres</returns>
-        [AllowAnonymous]
         [HttpGet("GetGenres")]
+        [AllowAnonymous]
         public IEnumerable<GenreDTO> GetGenres()
         {
             IEnumerable<GenreDTO> genres = _filmRepository.GetAllGenres()
@@ -71,7 +69,6 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                    Genrenaam = genre.Naam
                });
               return genres;
-
         } 
 
         //GET: api/Films/GetFilmByTitle/Titanic
@@ -80,8 +77,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="titel">Titel van de film</param>
         /// <returns>De film</returns>
-        [AllowAnonymous]
         [HttpGet("GetFilmByTitle/{titel}")]
+        [AllowAnonymous]
         public ActionResult<FilmDTO> GetFilmByTitle(string titel)
         {
             Film film = _filmRepository.GetFilmByTitel(titel);
@@ -101,8 +98,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="jaar">jaar van de film</param>
         /// <returns>array van films</returns>
-        [AllowAnonymous]
         [HttpGet("GetFilmsByJaar/{jaar}")]
+        [AllowAnonymous]
         public IEnumerable<FilmDTO> GetFilmsByJaar(int jaar)
         {
             IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByYear(jaar)
@@ -131,8 +128,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="genre">genre naam</param>
         /// <returns>array van films</returns>
-        [AllowAnonymous]
         [HttpGet("GetFilmsByGenre/{genre}")]
+        [AllowAnonymous]
         public IEnumerable<FilmDTO> GetFilmsByGenre(string genre)
         {
             IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByGenre(genre)

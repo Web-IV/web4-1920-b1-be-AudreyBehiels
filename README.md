@@ -33,6 +33,7 @@ PUT api/Gebruiker/VerwijderDuim/{filmtitel}
 
 # screenshots Klassendiagram
 ![Alt text](Screenshots/Klassendiagram.png)
+
 ![Alt text](Screenshots/Repo_Controller.png)
 
 # de readme

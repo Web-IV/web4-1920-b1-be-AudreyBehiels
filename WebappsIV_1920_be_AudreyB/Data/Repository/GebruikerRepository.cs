@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebappsIV_1920_be_AudreyB.Models;
 
 namespace WebappsIV_1920_be_AudreyB.Data.Repository
@@ -37,8 +34,8 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
 
         public void ToevoegenGebruiker(Gebruiker gerbuiker)
         {
-            _filmContext.Gebruikers.Add(gerbuiker);
-           // _gebruikers.Add(gerbuiker);
+            //_filmContext.Gebruikers.Add(gerbuiker);
+           _gebruikers.Add(gerbuiker);
         }
         public void SaveChanges()
         {
@@ -49,7 +46,8 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
 
         public Gebruiker GetGebruikerByEmail(string mailadres)
         {
-            return _filmContext.Gebruikers.SingleOrDefault(g => g.Mailadres.Equals(mailadres));
+            //return _filmContext.Gebruikers.SingleOrDefault(g => g.Mailadres == mailadres);
+              return _gebruikers.Include(g => g.FilmGebruikers).SingleOrDefault(g => g.Mailadres ==mailadres);
         }
 
         /*  public void AddFilmToOwnList(string titel)
