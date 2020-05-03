@@ -40,7 +40,7 @@ PUT api/Gebruiker/VerwijderDuim/{filmtitel}
 - [x] Printscreen van de API zoals weergegeven in swagger. Per endpoint een printscreen van de parameters en de responses
 - [x] Printscreen van het klassendiagram van de domeinlaag (toont de klassen met properties en methodes (inclusief de datatypes) en de associaties)
 - [x] Opsomming van de instellingen die nodig zijn om je backend project lokaal te runnen, indien nodig
-- [ ] Voorbereiding feedback moment:
+- [x] Voorbereiding feedback moment:
       - Ik zou graag willen weten of ik de FilmController klasse juist hebt geimplementeerd met de DTOs
 	  - Moeten we onze webapplicatie op Angular plaatsen op het einde?
 	  - Ik zou graag willen weten of mijn domeinlaag en mijn controllerklasse goed zijn
