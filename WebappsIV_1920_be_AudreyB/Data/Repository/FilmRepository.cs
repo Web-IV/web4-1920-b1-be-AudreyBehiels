@@ -87,6 +87,20 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
             _filmContext.SaveChanges();
         }
 
+        public Film GetByID(int id)
+        {
+            return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
+                .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
+               .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
+               .SingleOrDefault(f => f.FilmId == id);
+
+        }
+
+        public void Delete(Film film)
+        {
+            _films.Remove(film);
+        }
+
         #endregion
     }
 }

@@ -184,6 +184,22 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             }
             return films;
         }
-
+        /// <summary>
+        /// verwijderd de film
+        /// </summary>
+        /// <param name="id">id van film die verwijder wordt</param>
+        [HttpDelete("DeleteFilm/{id}")]
+      //  [AllowAnonymous]
+        public IActionResult DeleteFilm(int id)
+        {
+            Film film = _filmRepository.GetByID(id);
+            if (film == null)
+            {
+                return NotFound();
+            }
+            _filmRepository.Delete(film);
+            _filmRepository.SaveChanges();
+            return NoContent();
+        }
     }
 }

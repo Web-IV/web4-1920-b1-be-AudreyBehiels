@@ -14,5 +14,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         IEnumerable<Film> GetFilmsByGenre(string genre);
         IEnumerable<Genre> GetAllGenres();
         void SaveChanges();
+        Film GetByID(int id);
+        void Delete(Film film);
     }
 }
