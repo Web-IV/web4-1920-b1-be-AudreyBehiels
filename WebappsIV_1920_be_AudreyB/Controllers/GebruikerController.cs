@@ -29,7 +29,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <returns>de gebruiker</returns>
         [HttpGet("GetGebruiker")]
-        public ActionResult<GebruikerDTO> GetGebruiker()
+        public ActionResult<GebruikerDTO> GetGebruiker() // WERKT NIET
         {
             string username = User.Identity.Name;
             Gebruiker gebruiker = _gebruikerRepository.GetGebruikerByEmail(User.Identity.Name);
@@ -42,6 +42,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="filmtitel">titel van de film</param>
         [HttpPut("VoegtDuimToe/{filmtitel}")]
+        [Authorize(Roles ="Gebruiker")]
         public IActionResult VoegDuimToe(string filmtitel)
         {
             Film film = _filmRepository.GetFilmByTitel(filmtitel);
@@ -62,6 +63,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="filmtitel">titel van de film</param>
         [HttpPut("VerwijderdDuim/{filmtitel}")]
+        [Authorize(Roles = "Gebruiker")]
         public IActionResult VerwijderDuim(string filmtitel)
         {
 

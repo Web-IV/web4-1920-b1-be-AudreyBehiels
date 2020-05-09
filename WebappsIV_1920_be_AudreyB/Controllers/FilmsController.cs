@@ -190,6 +190,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <param name="id">id van film die verwijder wordt</param>
         [HttpDelete("DeleteFilm/{id}")]
       //  [AllowAnonymous]
+      [Authorize(Roles = "Admin")]
         public IActionResult DeleteFilm(int id)
         {
             Film film = _filmRepository.GetByID(id);

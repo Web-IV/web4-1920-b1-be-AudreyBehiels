@@ -14,6 +14,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public string Familienaam { get; set; }
         //  public string wachwoord { get; set; }
         public string Mailadres { get; set; }
+        public bool IsAdmin { get; set; }
         public ICollection<FilmGebruiker> FilmGebruikers { get; internal set; }
         #endregion
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebappsIV_1920_be_AudreyB.Models;
 
@@ -11,6 +12,8 @@ namespace WebappsIV_1920_be_AudreyB.Data
     {
         private readonly FilmContext _dbFilmContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private Gebruiker admin;
+        private Gebruiker gebruiker;
 
         public FilmDataInitializer(FilmContext dbFilmContext, UserManager<IdentityUser> userManager)
         {
@@ -23,12 +26,16 @@ namespace WebappsIV_1920_be_AudreyB.Data
            _dbFilmContext.Database.EnsureDeleted();
             if (_dbFilmContext.Database.EnsureCreated())
             {
-                Gebruiker hoofdverantwoordelijke = new Gebruiker("Audrey", "Behiels", "audrey.behiels@gmail.com");
-     
-                _dbFilmContext.Gebruikers.Add(hoofdverantwoordelijke);
-                await AanmakenGebruiker(hoofdverantwoordelijke.Mailadres, "P@ssword1111");
+                 admin = new Gebruiker("Audrey", "Behiels", "audrey.behiels@gmail.com");
+                admin.IsAdmin = true;
+                 gebruiker = new Gebruiker("Kris", "Jansens", "kris.jansens@gmail.com");
+                gebruiker.IsAdmin = false;
+                _dbFilmContext.Gebruikers.AddRange(new Gebruiker[] { admin, gebruiker });
                 
+             //   await AanmakenGebruiker(admin.Mailadres, "P@ssword1111");
+               // await AanmakenGebruiker(gebruiker.Mailadres, "P@ss1111");
                 _dbFilmContext.SaveChanges();
+                await AanmakenGebruiker();
 
                 #region Acteurs
                 Acteur LeonardoDC = new Acteur("Leonardo DiCaprio");
@@ -264,7 +271,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa21, fa22, fa23, fa24 });
                 _dbFilmContext.SaveChanges();
               
-                 Film TheLordOfTheRings1 = new Film("The Lord of the Rings: The Fellowship of the Ring", 2001, 178, "Peter Jackson",
+                 Film TheLordOfTheRings1 = new Film("The Lord of the Rings, The Fellowship of the Ring", 2001, 178, "Peter Jackson",
                     "Een eeuwenoude ring, die jaren zoek is geweest, wordt gevonden en komt bij toeval terecht bij de kleine Hobbit Frodo." +
                     " Als de tovenaar Gandalf erachter komt dat deze ring eigenlijk de Ene Ring is waar de slechte Sauron naar op zoek is, gaat Frodo samen met Gandalf, een Dwerg, een Elf, twee Mensen en drie andere Hobbits op een groots avontuur om deze te vernietigen.", "New Line Cinema");
                 _dbFilmContext.Films.Add(TheLordOfTheRings1);
@@ -323,7 +330,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa33, fa34, fa35, fa36 });
                 _dbFilmContext.SaveChanges();
 
-               Film PiratesOfTheCaribbeanI = new Film("Pirates of the Caribbean: The Curse of the Black Pearl",2003,  143,"Gore Verbinski", 
+               Film PiratesOfTheCaribbeanI = new Film("Pirates of the Caribbean, The Curse of the Black Pearl",2003,  143,"Gore Verbinski", 
                     "Jack Sparrow, de afgedankte kapitein van het beroemde spookschip The Black Pearl, wil zijn schip terug. De nieuwe kapitein, Barbossa, ontvoert Elizabeth Swann tijdens één van hun veroveringen, omdat Elizabeth de enige lijkt die er voor kan zorgen dat de vloek van Cortez, die op Barbossa en zijn crew rust, wordt opgeheven. " +
                      "De ware persoon die de vloek kan opheffen is echter Will Turner, die smoorverliefd is op Elizabeth. En dus schakelt Will, om Elizabeth te redden, de enige in die de thuishaven van The Black Pearl kent: Kapitein Jack Sparrow.", "Buena Vista Pictures");
                 _dbFilmContext.Films.Add(PiratesOfTheCaribbeanI);
@@ -368,10 +375,17 @@ namespace WebappsIV_1920_be_AudreyB.Data
             }
         }
 
-        private async Task AanmakenGebruiker(string mailadres, string wachtwoord)
+        private async Task AanmakenGebruiker(/*string mailadres, string wachtwoord*/)
         {
-            var user = new IdentityUser { UserName = mailadres, Email = mailadres };
-            await _userManager.CreateAsync(user, wachtwoord);
+            //  var user = new IdentityUser { UserName = mailadres, Email = mailadres };
+        
+            var gebruiker1 = new IdentityUser { UserName = gebruiker.Mailadres, Email = gebruiker.Mailadres };
+            await _userManager.CreateAsync(gebruiker1, "P@ssword1111");
+            await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "Gebruiker"));
+
+            var admin1 = new IdentityUser { UserName = admin.Mailadres, Email = admin.Mailadres };
+            await _userManager.CreateAsync(admin1, "P@ss1111");
+            await _userManager.AddClaimAsync(admin1, new Claim(ClaimTypes.Role, "Admin"));
         }
     }
 }

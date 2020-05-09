@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,6 +51,14 @@ namespace WebappsIV_1920_be_AudreyB
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+                option.AddPolicy("Gebruiker", policy => policy.RequireClaim(ClaimTypes.Role, "Gebruiker"));
+
+            });
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
