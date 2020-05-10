@@ -12,7 +12,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
     {
         private readonly FilmContext _dbFilmContext;
         private readonly UserManager<IdentityUser> _userManager;
-        private Gebruiker admin;
+       private Gebruiker admin;
         private Gebruiker gebruiker;
 
         public FilmDataInitializer(FilmContext dbFilmContext, UserManager<IdentityUser> userManager)
@@ -26,16 +26,22 @@ namespace WebappsIV_1920_be_AudreyB.Data
            _dbFilmContext.Database.EnsureDeleted();
             if (_dbFilmContext.Database.EnsureCreated())
             {
-                 admin = new Gebruiker("Audrey", "Behiels", "audrey.behiels@gmail.com");
-                admin.IsAdmin = true;
-                 gebruiker = new Gebruiker("Kris", "Jansens", "kris.jansens@gmail.com");
-                gebruiker.IsAdmin = false;
+                admin = new Gebruiker("Audrey", "Behiels", "audrey.behiels@gmail.com")
+                {
+                    IsAdmin = true
+                };
+                //await AanmakenGebruiker(admin.Mailadres, "P@ssword1111");
+                //await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "Gebruiker"));
+
+                gebruiker = new Gebruiker("Kris", "Jansens", "kris.jansens@gmail.com") {
+                    IsAdmin = false
+            };
+                //await AanmakenGebruiker(gebruiker.Mailadres, "P@ss1111");
                 _dbFilmContext.Gebruikers.AddRange(new Gebruiker[] { admin, gebruiker });
-                
-             //   await AanmakenGebruiker(admin.Mailadres, "P@ssword1111");
-               // await AanmakenGebruiker(gebruiker.Mailadres, "P@ss1111");
+              
+               await AanmakenGebruiker();
+               
                 _dbFilmContext.SaveChanges();
-                await AanmakenGebruiker();
 
                 #region Acteurs
                 Acteur LeonardoDC = new Acteur("Leonardo DiCaprio");
@@ -376,16 +382,22 @@ namespace WebappsIV_1920_be_AudreyB.Data
         }
 
         private async Task AanmakenGebruiker(/*string mailadres, string wachtwoord*/)
-        {
+        { 
+            var claims = new List<Claim>() { };
             //  var user = new IdentityUser { UserName = mailadres, Email = mailadres };
-        
-            var gebruiker1 = new IdentityUser { UserName = gebruiker.Mailadres, Email = gebruiker.Mailadres };
-            await _userManager.CreateAsync(gebruiker1, "P@ssword1111");
-            await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "Gebruiker"));
+            //await _userManager.CreateAsync(mailadres, wachtwoord);
+           var gebruiker1 = new IdentityUser { UserName = gebruiker.Mailadres, Email = gebruiker.Mailadres };
+           await _userManager.CreateAsync(gebruiker1, "W@chtwoord1");
+           await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "Gebruiker"));
+           var roleClaims1 = await _userManager.GetClaimsAsync(gebruiker1);
+            claims.AddRange(roleClaims1);
 
             var admin1 = new IdentityUser { UserName = admin.Mailadres, Email = admin.Mailadres };
-            await _userManager.CreateAsync(admin1, "P@ss1111");
+            await _userManager.CreateAsync(admin1, "W@chtwoord2");
             await _userManager.AddClaimAsync(admin1, new Claim(ClaimTypes.Role, "Admin"));
+            var roleClaims2 = await _userManager.GetClaimsAsync(admin1);
+            claims.AddRange(roleClaims2);
+
         }
     }
 }

@@ -48,7 +48,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<String>> AanmakenToken(LoginDTO model) // inloggen
+        public async Task<ActionResult<string>> Login(LoginDTO model) // inloggen //AanmakenToken
         {
             var gebruiker = await _userManager.FindByNameAsync(model.Mailadres);
             if (gebruiker != null)
@@ -82,7 +82,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("registreer")]
-        public async Task<ActionResult<String>> Registreer(RegisterDTO model)
+        public async Task<ActionResult<string>> Registreer(RegisterDTO model)
         {
             IdentityUser user = new IdentityUser
             {
@@ -106,7 +106,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns>true als het emailadres nog niet geregistreerd is</returns>
         /// <param name="email">mailadres</param>/
         [AllowAnonymous]
-        [HttpGet("ControlleertUsername")]
+        [HttpGet("checkusername")]
         public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)
         {
             var user = await _userManager.FindByNameAsync(email);

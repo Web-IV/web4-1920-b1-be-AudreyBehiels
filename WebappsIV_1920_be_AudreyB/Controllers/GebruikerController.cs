@@ -42,7 +42,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="filmtitel">titel van de film</param>
         [HttpPut("VoegtDuimToe/{filmtitel}")]
-        [Authorize(Roles ="Gebruiker")]
+        [Authorize(Policy ="Gebruiker")]
         public IActionResult VoegDuimToe(string filmtitel)
         {
             Film film = _filmRepository.GetFilmByTitel(filmtitel);
@@ -63,7 +63,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// </summary>
         /// <param name="filmtitel">titel van de film</param>
         [HttpPut("VerwijderdDuim/{filmtitel}")]
-        [Authorize(Roles = "Gebruiker")]
+        [Authorize(Policy = "Gebruiker")]
         public IActionResult VerwijderDuim(string filmtitel)
         {
 

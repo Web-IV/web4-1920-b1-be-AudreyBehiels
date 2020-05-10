@@ -8,13 +8,11 @@ namespace WebappsIV_1920_be_AudreyB.DTOs
 {
     public class LoginDTO
     {
-        [Required(ErrorMessage ="{0} is verplicht")]
-        [EmailAddress (ErrorMessage ="hoofdletter, cijfer en speciaal teken is verplicht")]
-        [DataType(DataType.EmailAddress) ]
+        [Required]
+       [EmailAddress]
         public string Mailadres { get; set; }
 
-        [Required(ErrorMessage = "{0} is verplicht")]
-        [DataType(DataType.Password)]
+        [Required]
         public string Wachtwoord { get; set; }
     }
 }

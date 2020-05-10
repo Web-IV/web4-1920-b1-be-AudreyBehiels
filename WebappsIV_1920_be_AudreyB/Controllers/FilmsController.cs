@@ -13,8 +13,8 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class FilmsController : ControllerBase
     {
         private readonly IFilmRepository _filmRepository;
@@ -190,7 +190,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <param name="id">id van film die verwijder wordt</param>
         [HttpDelete("DeleteFilm/{id}")]
       //  [AllowAnonymous]
-      [Authorize(Roles = "Admin")]
+      [Authorize(Policy = "Admin")]
         public IActionResult DeleteFilm(int id)
         {
             Film film = _filmRepository.GetByID(id);
