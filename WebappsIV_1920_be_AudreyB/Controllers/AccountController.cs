@@ -82,7 +82,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("registreer")]
-        public async Task<ActionResult<string>> Registreer(RegisterDTO model)
+        public async Task<ActionResult<string>> Registreer(RegistreerDTO model)
         {
             IdentityUser user = new IdentityUser
             {
