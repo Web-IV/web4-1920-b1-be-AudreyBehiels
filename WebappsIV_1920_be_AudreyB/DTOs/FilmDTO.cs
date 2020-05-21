@@ -17,9 +17,11 @@ namespace WebappsIV_1920_be_AudreyB.DTOs
         public string Regisseur { get; set; }
         public ICollection<FilmSchrijver> FilmSchrijvers { get; set; }
         public ICollection<FilmActeur> FilmActeurs { get; set; }
+
+        public ICollection<FilmGebruiker> FilmGebruikers { get;  set; }
         public string KorteInhoud { get; set; }
         public string Productiebedrijf { get; set; }
-
+        public int AantalDuimenOmhoog { get; set; }
         public FilmDTO() { }
 
         public FilmDTO(Film film)
@@ -32,8 +34,11 @@ namespace WebappsIV_1920_be_AudreyB.DTOs
             Regisseur = film.Regisseur;
             FilmSchrijvers = film.FilmSchrijvers;
             FilmActeurs = film.FilmActeurs;
+            FilmGebruikers = film.FilmGebruikers;
             KorteInhoud = film.KorteInhoud;
             Productiebedrijf = film.Productiebedrijf;
+            AantalDuimenOmhoog = film.AantalDuimenOmhoog;
+         
 
 
         }

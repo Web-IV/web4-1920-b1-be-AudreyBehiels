@@ -40,14 +40,13 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #endregion
 
         #region Constructors
-        public FilmGebruiker()
-        {
-
-        }
+        public FilmGebruiker() {  }
         public FilmGebruiker(Film film, Gebruiker gebruiker)
         {
             this.Film = film;
+            this.FilmID = film.FilmId;
             this.Gebruiker = gebruiker;
+            this.GebruikerID = gebruiker.GebruikerID;
             this.GebruikerNaam = gebruiker.Voornaam + ' ' + gebruiker.Familienaam;
 
         } 

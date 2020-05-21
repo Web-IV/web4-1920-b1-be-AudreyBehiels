@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +45,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                     FilmSchrijvers = film.FilmSchrijvers,
                     KorteInhoud = film.KorteInhoud,
                     Productiebedrijf = film.Productiebedrijf
+
                 });
             if (films == null)
             {
@@ -184,23 +184,6 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             }
             return films;
         }
-        /// <summary>
-        /// verwijderd de film
-        /// </summary>
-        /// <param name="id">id van film die verwijder wordt</param>
-        [HttpDelete("DeleteFilm/{id}")]
-      //  [AllowAnonymous]
-      [Authorize(Policy = "Admin")]
-        public IActionResult DeleteFilm(int id)
-        {
-            Film film = _filmRepository.GetByID(id);
-            if (film == null)
-            {
-                return NotFound();
-            }
-            _filmRepository.Delete(film);
-            _filmRepository.SaveChanges();
-            return NoContent();
-        }
+        
     }
 }

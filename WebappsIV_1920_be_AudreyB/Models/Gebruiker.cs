@@ -25,6 +25,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.Voornaam = voornaam;
             this.Familienaam = familienaam;
             this.Mailadres = mailadres;
+            this.FilmGebruikers = new List<FilmGebruiker>();
         }
         #endregion
 

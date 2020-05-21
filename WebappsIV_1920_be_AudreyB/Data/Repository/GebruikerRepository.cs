@@ -8,34 +8,35 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
     {
         #region Properties
         private readonly FilmContext _filmContext;
-        private readonly DbSet<Film> _films;
+        //private readonly DbSet<Film> _films;
         private readonly DbSet<Gebruiker> _gebruikers;
 
         #region Constructor
         public GebruikerRepository(FilmContext dbFilmContext)
         {
             _filmContext = dbFilmContext;
-            _films = dbFilmContext.Films;
+            //_films = dbFilmContext.Films;
             _gebruikers = dbFilmContext.Gebruikers;
         }
         #endregion
 
         #endregion
-        public void VoegDuimToe(Film film)
+        public void VoegDuimToe(Film film, Gebruiker g)
         {
-            film.VoegDuimToe();
+            
+            film.VoegDuimToe(g);
            
          
         }
-        public void VerwijderDuim(Film film)
+        public void VerwijderDuim(Film film, Gebruiker g)
         { 
-            film.VerwijderDuim();
+            film.VerwijderDuim(g);
         }
 
-        public void ToevoegenGebruiker(Gebruiker gerbuiker)
+        public void ToevoegenGebruiker(Gebruiker gebruiker)
         {
-            //_filmContext.Gebruikers.Add(gerbuiker);
-           _gebruikers.Add(gerbuiker);
+            //_filmContext.Gebruikers.Add(gebruiker);
+           _gebruikers.Add(gebruiker);
         }
         public void SaveChanges()
         {

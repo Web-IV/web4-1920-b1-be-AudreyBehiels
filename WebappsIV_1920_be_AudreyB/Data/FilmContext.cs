@@ -19,6 +19,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
         public DbSet<FilmGenre> FilmGenres { get; set; }
         public DbSet<FilmSchrijver> FilmSchrijvers { get; set; }
         public DbSet<FilmActeur> FilmActeurs { get; set; }
+        public DbSet<FilmGebruiker> FilmGebruikers { get; set; }
         public DbSet<Gebruiker> Gebruikers { get; set; }
 
         public FilmContext(DbContextOptions<FilmContext> options) : base(options)
@@ -32,8 +33,8 @@ namespace WebappsIV_1920_be_AudreyB.Data
             builder.ApplyConfiguration(new FilmGenreConfiguration());
             builder.ApplyConfiguration(new FilmSchrijverConfiguration());
             builder.ApplyConfiguration(new FilmActeurConfiguration());
-            builder.ApplyConfiguration(new GebruikerConfiguration());
             builder.ApplyConfiguration(new FilmGebruikerConfiguration());
+            builder.ApplyConfiguration(new GebruikerConfiguration());
 
         }
     }

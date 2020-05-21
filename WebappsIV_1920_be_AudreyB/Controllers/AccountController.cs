@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,17 +27,17 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
 
-        private readonly IFilmRepository _filmRepository;
+        //private readonly IFilmRepository _filmRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
-
+      
         public AccountController(
            SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IConfiguration config,
-           IFilmRepository filmContext, IGebruikerRepository gebruikerContext)
+           /*IFilmRepository filmContext,*/ IGebruikerRepository gebruikerContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _config = config;
-            _filmRepository = filmContext;
+           // _filmRepository = filmContext;
             _gebruikerRepository = gebruikerContext;
 
         }
@@ -53,6 +54,7 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             var gebruiker = await _userManager.FindByNameAsync(model.Mailadres);
             if (gebruiker != null)
             {
+               
                 var result = await _signInManager.CheckPasswordSignInAsync(gebruiker, model.Wachtwoord, false);
                 if (result.Succeeded)
                 {
@@ -112,5 +114,22 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             var user = await _userManager.FindByNameAsync(email);
             return user == null;
         }
+
+        // GET api/gebruiker/GetGebruiker
+        /// <summary>
+        /// geeft de details van de geathenticeerde gebruiker
+        /// </summary>
+        /// <returns>de gebruiker</returns>
+        [HttpGet("GetGebruiker")]
+        public ActionResult<GebruikerDTO> GetGebruiker() // WERKT NIET
+        {
+            //var avr = _userManager.GetLoginsAsync(HttpContext.User);
+            //var current_User = await _userManager.GetUserAsync(HttpContext.User);
+            
+            //   Gebruiker gebruiker = _gebruikerRepository.GetGebruikerByEmail();
+            //  return new GebruikerDTO(gebruiker);
+            return null;
+        }
+
     }
 }

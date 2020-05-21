@@ -1,20 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
@@ -47,17 +42,17 @@ namespace WebappsIV_1920_be_AudreyB
 
              services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<FilmContext>();
                
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            //services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
 
-            services.AddAuthorization(option =>
+         /*   services.AddAuthorization(option =>
             {
                 option.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
                 option.AddPolicy("Gebruiker", policy => policy.RequireClaim(ClaimTypes.Role, "Gebruiker"));
 
-            });
+            });*/
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -67,7 +62,7 @@ namespace WebappsIV_1920_be_AudreyB
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 6;
-                //options.Password.RequiredUniqueChars = 1;
+                options.Password.RequiredUniqueChars = 1;
 
                 // Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -80,7 +75,7 @@ namespace WebappsIV_1920_be_AudreyB
                 options.User.RequireUniqueEmail = true;
             });
 
-            IdentityModelEventSource.ShowPII = true;
+           // IdentityModelEventSource.ShowPII = true;
             services.AddOpenApiDocument(s =>
             {
                 s.DocumentName = "API Film docs";
@@ -109,7 +104,8 @@ namespace WebappsIV_1920_be_AudreyB
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
                         ValidateIssuer = false,
                         ValidateAudience = false,
                     RequireExpirationTime = true //Ensure token hasn't expired
@@ -146,7 +142,7 @@ namespace WebappsIV_1920_be_AudreyB
             {
                 endpoints.MapControllers();
             });
-            filmDataInitializer.InitializeData().Wait();
+           filmDataInitializer.InitializeData().Wait();
         }
     }
 }
