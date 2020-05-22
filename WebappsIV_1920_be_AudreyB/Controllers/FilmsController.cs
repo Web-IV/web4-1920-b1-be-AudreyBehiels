@@ -164,7 +164,11 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         [AllowAnonymous]
         public IEnumerable<FilmDTO> GetFilmsByGenre(string genre)
         {
-            IEnumerable<FilmDTO> films = _filmRepository.GetFilmsByGenre(genre)
+            IEnumerable<FilmDTO> films;
+            if (genre.Equals("Alle genres"))
+            {
+                films = _filmRepository.GetAllFilms()
+
                 .Select(film => new FilmDTO()
                 {
                     FilmID = film.FilmId,
@@ -177,12 +181,34 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
                     FilmSchrijvers = film.FilmSchrijvers,
                     KorteInhoud = film.KorteInhoud,
                     Productiebedrijf = film.Productiebedrijf
+
                 });
+            }
+            else
+            {
+                films = _filmRepository.GetFilmsByGenre(genre)
+                    .Select(film => new FilmDTO()
+                    {
+                        FilmID = film.FilmId,
+                        Titel = film.Titel,
+                        Jaar = film.Jaar,
+                        Duur = film.Duur,
+                        Regisseur = film.Regisseur,
+                        FilmGenres = film.FilmGenres,
+                        FilmActeurs = film.FilmActeurs,
+                        FilmSchrijvers = film.FilmSchrijvers,
+                        KorteInhoud = film.KorteInhoud,
+                        Productiebedrijf = film.Productiebedrijf
+                    });
+            }
             if (films == null)
             {
                 throw new ArgumentNullException("Geen films");
             }
-            return films;
+            else
+            {
+                return films;
+            }
         }
         
     }

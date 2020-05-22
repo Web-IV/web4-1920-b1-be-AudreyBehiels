@@ -94,6 +94,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.SaveChanges();
 
                 #region Genres
+                Genre Alle = new Genre("Alle genres");
                 Genre Drama = new Genre("Drama");
                 Genre Romantiek = new Genre("Romantiek");
                 Genre Actie = new Genre("Actie");
@@ -121,9 +122,9 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 Genre Religieus = new Genre("Religieus");
                 Genre Geschiedenis = new Genre("Geschiedenis");
                 Genre Detective = new Genre("Detective");
-                Genre Familie = new Genre("Familie"); 
+                Genre Familie = new Genre("Familie");
                 #endregion
-                _dbFilmContext.Genres.AddRange(new Genre[] { Drama, Romantiek, Actie , Avontuur , Komedie , Documentaire , Fantasie, Horror,
+                _dbFilmContext.Genres.AddRange(new Genre[] { Alle, Drama, Romantiek, Actie , Avontuur , Komedie , Documentaire , Fantasie, Horror,
                 Kunst,Misdaad , Muziek, Natuur, Kinderfilm, Sport, Sciencefiction, Thriller, Westers, Oorlog, Superhelden, Tekenfilm, zwartWit,
                Religie, Musical, Mysterie, Religieus, Geschiedenis, Detective, Familie});
                 _dbFilmContext.SaveChanges();
