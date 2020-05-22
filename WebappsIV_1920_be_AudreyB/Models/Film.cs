@@ -20,7 +20,8 @@ namespace WebappsIV_1920_be_AudreyB.Models
         public ICollection<FilmGenre> FilmGenres { get; set; }
         public ICollection<FilmSchrijver> FilmSchrijvers { get; set; }
         public ICollection<FilmActeur> FilmActeurs { get; set; }
-        public ICollection<FilmGebruiker> FilmGebruikers { get;  set; } 
+        public ICollection<FilmGebruiker> FilmGebruikers { get;  set; }
+        public ICollection<GebruikerFilmLijst> GebruikerFilmLijst { get; set; }
         public string Productiebedrijf { get; set; }
         public string KorteInhoud { get; set; }
         public int AantalDuimenOmhoog { get; set; }
@@ -43,6 +44,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
             this.FilmSchrijvers = new List<FilmSchrijver>();
             this.FilmActeurs = new List<FilmActeur>();
             this.FilmGebruikers = new List<FilmGebruiker>();
+            this.GebruikerFilmLijst = new List<GebruikerFilmLijst>();
             this.AantalDuimenOmhoog = 0;
         }
         #endregion
@@ -55,16 +57,39 @@ namespace WebappsIV_1920_be_AudreyB.Models
         {
             
                 FilmGebruiker filmGebruiker = new FilmGebruiker(this, g);
-            if (g.FilmGebruikers.Contains(filmGebruiker))
+            if (FilmGebruikers.Count() == 0)
             {
-                throw new InvalidOperationException("De gebruiker heeft al een thumbs up gegevens");
-            }
-            else
-            {
-            
                 g.FilmGebruikers.Add(filmGebruiker);
                 FilmGebruikers.Add(filmGebruiker);
                 AantalDuimenOmhoog++;
+            }
+            else
+            {
+                foreach (FilmGebruiker fg in FilmGebruikers)
+                {
+                    if (fg.Film.Equals(filmGebruiker.Film))
+                    {
+
+                    }
+                    else
+                    {
+
+                        g.FilmGebruikers.Add(filmGebruiker);
+                        FilmGebruikers.Add(filmGebruiker);
+                        AantalDuimenOmhoog++;
+                    }
+                }
+                /*if (g.FilmGebruikers.Contains(filmGebruiker))
+                {
+                    throw new InvalidOperationException("De gebruiker heeft al een thumbs up gegevens");
+                }
+                else
+                {
+
+                    g.FilmGebruikers.Add(filmGebruiker);
+                    FilmGebruikers.Add(filmGebruiker);
+                    AantalDuimenOmhoog++;
+                }*/
             }
         }
         public void VerwijderDuim(Gebruiker g)
@@ -79,10 +104,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
                 {
                     g.FilmGebruikers.Remove(fg);
                     FilmGebruikers.Remove(fg);
-                AantalDuimenOmhoog--;
-                }
-                {
-
+                    AantalDuimenOmhoog--;
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace WebappsIV_1920_be_AudreyB.Data
         private readonly FilmContext _dbFilmContext;
         private readonly UserManager<IdentityUser> _userManager;
        private Gebruiker admin;
-        private Gebruiker gebruiker;
+        private Gebruiker gebruiker, gebruiker2;
 
         public FilmDataInitializer(FilmContext dbFilmContext, UserManager<IdentityUser> userManager)
         {
@@ -31,26 +31,16 @@ namespace WebappsIV_1920_be_AudreyB.Data
                     IsAdmin = true
                 };
                 _dbFilmContext.Gebruikers.Add(admin);
-                await AanmakenGebruiker(admin.Mailadres, "W@chtwoord2");
-                //await AanmakenGebruiker(admin.Mailadres, "P@ssword1111");
-               
-               // await _userManager.AddClaimAsync(admin, new Claim(ClaimTypes.Role, "Admin"));
 
                 gebruiker = new Gebruiker("Kris", "Jansens", "kris.jansens@gmail.com") {
                     IsAdmin = false
             };
-                //await AanmakenGebruiker(gebruiker.Mailadres, "P@ss1111");
-                //_dbFilmContext.Gebruikers.AddRange(new Gebruiker[] { admin, gebruiker });
-                // await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "Gebruiker"));
                 _dbFilmContext.Gebruikers.Add(gebruiker);
 
-                await AanmakenGebruiker(gebruiker.Mailadres, "W@chtwoord1");
-                Gebruiker gebruiker2 = new Gebruiker { Voornaam = "Anne", Familienaam = "Vinke", Mailadres = "anne@gmail.com", IsAdmin = false };
+                 gebruiker2 = new Gebruiker { Voornaam = "Anne", Familienaam = "Vinke", Mailadres = "anne@gmail.com", IsAdmin = false };
                 _dbFilmContext.Gebruikers.Add(gebruiker2);
-                await AanmakenGebruiker(gebruiker2.Mailadres, "W@chtwoord2");
 
-
-                // await AanmakenGebruiker();
+                await AanmakenGebruiker();
 
                 _dbFilmContext.SaveChanges();
 
@@ -389,35 +379,52 @@ namespace WebappsIV_1920_be_AudreyB.Data
                 _dbFilmContext.FilmActeurs.AddRange(new FilmActeur[] { fa41, fa42, fa43, fa44 });
                 _dbFilmContext.SaveChanges();
 
-                FilmGebruiker fgebruiker = new FilmGebruiker(Titanic, admin);
+                //upvote
+               /* FilmGebruiker fgebruiker = new FilmGebruiker(Titanic, admin);
                 _dbFilmContext.FilmGebruikers.Add(fgebruiker);
                 Titanic.FilmGebruikers.Add(fgebruiker);
                 admin.FilmGebruikers.Add(fgebruiker);
                 Titanic.AantalDuimenOmhoog++;
                 _dbFilmContext.SaveChanges();
+
+                // FilmToevoegenAanlijst
+                GebruikerFilmLijst filmGebruiker = new GebruikerFilmLijst(Footloose, gebruiker);
+                _dbFilmContext.GebruikerFilmLijst.Add(filmGebruiker);
+                Footloose.GebruikerFilmLijst.Add(filmGebruiker);
+                gebruiker.GebruikerFilmLijst.Add(filmGebruiker);
+                _dbFilmContext.SaveChanges();*/
+
             }
         }
 
-        private async Task AanmakenGebruiker(string mailadres, string wachtwoord)
+        private async Task AanmakenGebruiker(/*string mailadres, string wachtwoord*/)
         { 
-         //   var claims = new List<Claim>() { };
-              var user = new IdentityUser { UserName = mailadres, Email = mailadres };
-            await _userManager.CreateAsync(user, wachtwoord);
-          //  var gebruiker1 = new IdentityUser { UserName = gebruiker.Mailadres, Email = gebruiker.Mailadres };
-            //await _userManager.AddLoginAsync(gebruiker1, null);
-          /* await _userManager.CreateAsync(gebruiker1, "W@chtwoord1");
-           await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "Gebruiker"));
-           var roleClaims1 = await _userManager.GetClaimsAsync(gebruiker1);
-            claims.AddRange(roleClaims1);
-         
+           var claims = new List<Claim>() { };
+            /*   var user = new IdentityUser { UserName = mailadres, Email = mailadres };
+            await _userManager.CreateAsync(user, wachtwoord);*/
+            
             var admin1 = new IdentityUser { UserName = admin.Mailadres, Email = admin.Mailadres };
             //await _userManager.AddLoginAsync(admin1, null);
-            await _userManager.CreateAsync(admin1, "W@chtwoord2");
-            await _userManager.AddClaimAsync(admin1, new Claim(ClaimTypes.Role, "Admin"));
-            var roleClaims2 = await _userManager.GetClaimsAsync(admin1);
-            claims.AddRange(roleClaims2);*/
+            await _userManager.CreateAsync(admin1, "W@chtwoord1");
+            await _userManager.AddClaimAsync(admin1, new Claim(ClaimTypes.Role, "admin"));
+            var roleClaims1 = await _userManager.GetClaimsAsync(admin1);
+            claims.AddRange(roleClaims1);
+
+            var gebruiker1 = new IdentityUser { UserName = gebruiker.Mailadres, Email = gebruiker.Mailadres };
+           // await _userManager.AddLoginAsync(gebruiker1, null);
+            await _userManager.CreateAsync(gebruiker1, "W@chtwoord2");
+            await _userManager.AddClaimAsync(gebruiker1, new Claim(ClaimTypes.Role, "gebruiker"));
+            var roleClaims2 = await _userManager.GetClaimsAsync(gebruiker1);
+            claims.AddRange(roleClaims2);
+
             
 
+            var gebruikerB = new IdentityUser { UserName = gebruiker2.Mailadres, Email = gebruiker2.Mailadres };
+            //await _userManager.AddLoginAsync(admin1, null);
+            await _userManager.CreateAsync(gebruikerB, "W@chtwoord2");
+            await _userManager.AddClaimAsync(gebruikerB, new Claim(ClaimTypes.Role, "gebruiker"));
+            var roleClaims3 = await _userManager.GetClaimsAsync(gebruikerB);
+            claims.AddRange(roleClaims3);
 
             // new IdentityUser[] { gebruiker1, admin1 };
 

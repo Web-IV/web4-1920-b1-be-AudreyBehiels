@@ -40,7 +40,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #endregion
 
         #region Constructors
-        public FilmSchrijver() { }
+        protected FilmSchrijver() { }
 
         public FilmSchrijver(Film film, Schrijver schrijver)
         {

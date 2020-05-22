@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using WebappsIV_1920_be_AudreyB.Models;
 
@@ -47,13 +48,27 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
 
         public Gebruiker GetGebruikerByEmail(string mailadres)
         {
-            //return _filmContext.Gebruikers.SingleOrDefault(g => g.Mailadres == mailadres);
-              return _gebruikers.Include(g => g.FilmGebruikers).SingleOrDefault(g => g.Mailadres ==mailadres);
+              return _gebruikers.Include(g => g.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                .Include(g => g.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker)
+                .Include(f => f.GebruikerFilmLijst).ThenInclude(f => f.Film)
+                .Include(f => f.GebruikerFilmLijst).ThenInclude(f => f.Film.FilmGenres)
+                .Include(f => f.GebruikerFilmLijst).ThenInclude(f => f.Film.FilmActeurs)
+                .Include(f => f.GebruikerFilmLijst).ThenInclude(f => f.Film.FilmSchrijvers)
+                .Include(f => f.GebruikerFilmLijst).ThenInclude(f => f.Film.GebruikerFilmLijst)
+                .SingleOrDefault(g => g.Mailadres == mailadres);
         }
 
-        /*  public void AddFilmToOwnList(string titel)
- {
+        public void VoegFilmToeAanEigenLijst(Film film, Gebruiker gebruiker)
+        {
+            
+            gebruiker.VoegFilmToe(film);
 
- }*/
+        }
+
+       /* public IEnumerable<Film> GetEigenLijstFilms(string mailadres)
+        {
+           return _gebruikers.Include(g=> g.FilmGebruikers).ThenInclude(g => g.Gerbuiker)
+                 .Include(g => g.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker).Where()
+        }*/
     }
 }

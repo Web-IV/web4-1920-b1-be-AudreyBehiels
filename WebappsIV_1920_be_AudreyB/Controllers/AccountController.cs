@@ -95,10 +95,14 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
             var result = await _userManager.CreateAsync(user, model.Wachtwoord);
             if (result.Succeeded)
             {
+               var resultaat = await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "gebruiker"));
+                if (resultaat.Succeeded) { 
                 _gebruikerRepository.ToevoegenGebruiker(gebruiker);
+
                 _gebruikerRepository.SaveChanges();
                 string token = GetToken(user);
                 return Created("", token);
+             }
             }
             return BadRequest();
         }
@@ -113,22 +117,6 @@ namespace WebappsIV_1920_be_AudreyB.Controllers
         {
             var user = await _userManager.FindByNameAsync(email);
             return user == null;
-        }
-
-        // GET api/gebruiker/GetGebruiker
-        /// <summary>
-        /// geeft de details van de geathenticeerde gebruiker
-        /// </summary>
-        /// <returns>de gebruiker</returns>
-        [HttpGet("GetGebruiker")]
-        public ActionResult<GebruikerDTO> GetGebruiker() // WERKT NIET
-        {
-            //var avr = _userManager.GetLoginsAsync(HttpContext.User);
-            //var current_User = await _userManager.GetUserAsync(HttpContext.User);
-            
-            //   Gebruiker gebruiker = _gebruikerRepository.GetGebruikerByEmail();
-            //  return new GebruikerDTO(gebruiker);
-            return null;
         }
 
     }

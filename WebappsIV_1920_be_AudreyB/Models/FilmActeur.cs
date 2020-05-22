@@ -39,7 +39,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #endregion
 
         #region Constructors
-        public FilmActeur() { }
+        protected FilmActeur() { }
         public FilmActeur(Film film, Acteur acteur)
         {
             this.Film = film;

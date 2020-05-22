@@ -17,6 +17,7 @@ namespace WebappsIV_1920_be_AudreyB.DTOs
             Voornaam = gebruiker.Voornaam;
             Familienaam = gebruiker.Familienaam;
             Mailadres = gebruiker.Mailadres;
+        
             
         }
     }

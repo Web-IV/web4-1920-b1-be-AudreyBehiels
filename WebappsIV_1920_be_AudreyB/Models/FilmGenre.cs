@@ -41,7 +41,7 @@ namespace WebappsIV_1920_be_AudreyB.Models
         #endregion
 
         #region Constructors
-        public FilmGenre() { }
+        protected FilmGenre() { }
         
         public FilmGenre(Film film, Genre genre)
         {

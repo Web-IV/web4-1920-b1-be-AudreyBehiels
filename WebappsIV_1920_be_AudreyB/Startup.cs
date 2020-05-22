@@ -40,19 +40,20 @@ namespace WebappsIV_1920_be_AudreyB
             services.AddDbContext<FilmContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("FilmContext")));
 
-             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<FilmContext>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
+                options.AddPolicy("Gebruiker", policy => policy.RequireClaim(ClaimTypes.Role, "gebruiker"));
+
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<FilmContext>();
                
             //services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddScoped<FilmDataInitializer>();
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
 
-         /*   services.AddAuthorization(option =>
-            {
-                option.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
-                option.AddPolicy("Gebruiker", policy => policy.RequireClaim(ClaimTypes.Role, "Gebruiker"));
-
-            });*/
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -82,14 +83,14 @@ namespace WebappsIV_1920_be_AudreyB
                 s.Title = "Film API";
                 s.Version = "v1";
                 s.Description = "De documentatie van de film API";
-                s.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                s.AddSecurity("JWT"/*, Enumerable.Empty<string>()*/, new OpenApiSecurityScheme
                 {
                     Type = OpenApiSecuritySchemeType.ApiKey,
-                    Name = "Authorizatie",
+                    Name = "Authorization",
                     In = OpenApiSecurityApiKeyLocation.Header,
                     Description = "Typ in het tekstvak: Bearer {jouw JWT token}."
                 });
-                s.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT token")); //adds the token when a request is send
+                s.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT")); //adds the token when a request is send
             });
 
             services.AddAuthentication(x =>

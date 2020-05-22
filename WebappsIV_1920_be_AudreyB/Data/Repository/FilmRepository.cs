@@ -31,6 +31,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
                .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                .Include(gfl => gfl.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker)
                 .ToList();
         }
 
@@ -40,6 +41,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Include(f => f.FilmActeurs).ThenInclude(fa => fa.Acteur)
                  .Include(f => f.FilmSchrijvers).ThenInclude(fs => fs.Schrijver)
                    .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                    .Include(gfl => gfl.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker)
                 .SingleOrDefault(f => f.Titel.ToLower().Equals(titel.ToLower()));
 
         }
@@ -50,6 +52,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
                  .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                  .Include(gfl => gfl.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker)
                 .Where(s => s.Titel.ToLower().StartsWith(titel.ToLower())).ToList();
         }
 
@@ -60,7 +63,8 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
             foreach (var film in _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
              .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
              .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
-               .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker))
+               .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                .Include(gfl => gfl.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker))
             {
                 foreach (var f in film.FilmGenres)
                 {
@@ -79,6 +83,7 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
                 .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
                  .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                .Include(gfl => gfl.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker)
                .Where(s => s.Jaar.Equals(jaar)).ToList();
         }
 
@@ -97,8 +102,9 @@ namespace WebappsIV_1920_be_AudreyB.Data.Repository
             return _films.Include(fg => fg.FilmGenres).ThenInclude(g => g.Genre)
                 .Include(fs => fs.FilmActeurs).ThenInclude(a => a.Acteur)
                .Include(fs => fs.FilmSchrijvers).ThenInclude(s => s.Schrijver)
-                 .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
-               .SingleOrDefault(f => f.FilmId == id);
+                .Include(fgebruiker => fgebruiker.FilmGebruikers).ThenInclude(g => g.Gebruiker)
+                 .Include(gfl => gfl.GebruikerFilmLijst).ThenInclude(g => g.Gebruiker)
+                  .SingleOrDefault(f => f.FilmId == id);
 
         }
 
